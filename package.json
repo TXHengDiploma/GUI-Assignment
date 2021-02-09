@@ -1,0 +1,23 @@
+{
+  "name": "gui-assignment",
+  "version": "1.0.0",
+  "description": "gui assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://txheng@github.com/TXHengDiploma/GUI-Assignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TXHengDiploma/GUI-Assignment/issues"
+  },
+  "homepage": "https://github.com/TXHengDiploma/GUI-Assignment#readme",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.5.1"
+  }
+}
