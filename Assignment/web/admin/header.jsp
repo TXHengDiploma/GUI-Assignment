@@ -17,19 +17,6 @@
 	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="/public/css/font.css" rel="stylesheet">
 	<link href="/public/css/app.css" rel="stylesheet">
-
-	<style>
-		.loading-err-center{
-			width: 100%; 
-			height: 100%; 
-			margin: auto; 
-			display: flex; 
-			align-items: center; 
-			justify-content: center;
-			flex-direction: column;
-		}
-	</style>
-
 	<!-- End CSS -->
 
 	<!-- Start JavaScript -->
