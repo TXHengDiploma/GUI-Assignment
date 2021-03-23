@@ -6,6 +6,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <link rel="stylesheet" href="/public/css/app.css">
+<script src="/public/vendor/jquery/jquery.min.js" defer></script>
 <style>
     html{
         height: 100%;
@@ -25,7 +26,29 @@ and open the template in the editor.
             <div class="d-flex flex-column text-center w-50">
                 <h2>ERROR 404</h2>
                 <h3>Page Not Found!</h3>
+                <div>
+                    <button class="btn btn-primary" back-to-home>Back To Home Page ( <span id="count-down">10</span> )</button>
+                    <button class="btn btn-default" reload>Relaod</button>
+                </div>
             </div>
         </div>
     </body>
 </html>
+<script defer>
+    let interval = setInterval(function(){
+        $("#count-down").text( parseInt($("#count-down").text()) - 1 );
+        if($("#count-down").text() === "0"){
+            clearInterval(interval);
+            location.replace("/");
+        }
+    },1000);
+
+    $("[back-to-home]").click(()=>{
+        clearInterval(interval);
+        location.replace("/");
+    });
+    $("[reload]").click(()=>{
+        clearInterval(interval);
+        location.reload();
+    });
+</script>
