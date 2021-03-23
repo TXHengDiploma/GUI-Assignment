@@ -18,6 +18,18 @@
 	<link href="/public/css/font.css" rel="stylesheet">
 	<link href="/public/css/app.css" rel="stylesheet">
 
+	<style>
+		.loading-err-center{
+			width: 100%; 
+			height: 100%; 
+			margin: auto; 
+			display: flex; 
+			align-items: center; 
+			justify-content: center;
+			flex-direction: column;
+		}
+	</style>
+
 	<!-- End CSS -->
 
 	<!-- Start JavaScript -->
@@ -30,34 +42,6 @@
 </head>
 
 <body id="page-top">
-
-	<template id="loading">
-		<div style="width: 100%; height: 100%; margin: auto; display: flex; align-items: center; justify-content: center;">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>
-	</template>
-
-	<template id="modal-loading">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title"></h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div style="width: 100%; height: 100%; margin: auto; display: flex; align-items: center; justify-content: center;">
-						<div class="spinner-border" role="status">
-							<span class="sr-only">Loading...</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</template>
 
 	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal">
 	</div>
