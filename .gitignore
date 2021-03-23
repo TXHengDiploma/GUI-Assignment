@@ -1,1 +1,4 @@
 node_modules
+/Assignment/nbproject/private/
+/Assignment/build/
+/Assignment/dist/

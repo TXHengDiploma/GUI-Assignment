@@ -53,4 +53,19 @@
     e.preventDefault();
   });
 
+  // data-ajax-modal scripts
+
+
+  $(document).on('click','[data-ajax-modal]',function(e){
+    e.preventDefault();
+    $("#ajax-modal").html($("#modal-loading").html());
+    $("#ajax-modal").modal("show");
+    $.get($(this).data('ajax-modal')).then(function(res){
+      $("#ajax-modal").html(res);
+    })
+  })
+  $("#ajax-modal").on('click','[data-dismiss="modal"]',function(e){
+    e.preventDefault();
+    $("#ajax-modal").modal("toggle");
+  });
 })(jQuery); // End of use strict
