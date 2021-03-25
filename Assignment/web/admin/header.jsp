@@ -10,11 +10,13 @@
 	<title>${param.pageTitle} - Coy Name</title>
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/jpg" href="Favicon_Image_Location"/>
+	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
 
 	<!-- Start CSS -->
 	<!-- Custom fonts for this template-->
-	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link href="/public/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 	<link href="/public/css/font.css" rel="stylesheet">
 	<link href="/public/css/app.css" rel="stylesheet">
 	<!-- End CSS -->
@@ -23,6 +25,11 @@
 	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
+	<script src="/public/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
+	<script src="/public/vendor/parsleyjs/parsley.min.js" defer></script>
+	<script src="/public/vendor/notify/notify.min.js"  defer></script>
+	<script src="/public/vendor/sweetalert2/dist/sweetalert2.all.min.js"  defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 
@@ -30,6 +37,7 @@
 
 <body id="page-top">
 
+	<form id="ajax-form"></form>
 	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal">
 	</div>
 
@@ -88,33 +96,10 @@
 						<i class="fa fa-bars"></i>
 					</button>
 
+					<h3>${param.pageTitle}</h3>
+
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-
-						<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-						<li class="nav-item dropdown no-arrow d-sm-none">
-							<a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-search fa-fw"></i>
-							</a>
-							<!-- Dropdown - Messages -->
-							<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-								aria-labelledby="searchDropdown">
-								<form class="form-inline mr-auto w-100 navbar-search">
-									<div class="input-group">
-										<input type="text" class="form-control bg-light border-0 small"
-											placeholder="Search for..." aria-label="Search"
-											aria-describedby="basic-addon2">
-										<div class="input-group-append">
-											<button class="btn btn-primary" type="button">
-												<i class="fas fa-search fa-sm"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</li>
-
 						<!-- Nav Item - Alerts -->
 						<li class="nav-item dropdown no-arrow mx-1">
 							<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
