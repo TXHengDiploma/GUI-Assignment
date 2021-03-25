@@ -11,7 +11,7 @@
 		<% for(Product product : products) { %> 
                 <tr>
                     <td><%= product.getName() %></td>
-                    <td><%= product.getPrice() %></td>
+                    <td><%= String.format("%.2f",product.getPrice()) %></td>
 					<td>
 						<div class="btn-group">
 							<button class="btn btn-secondary" data-ajax-modal="/admin/products/edit?id=<%= product.getId() %>"><i class="fa fa-edit"></i></button>

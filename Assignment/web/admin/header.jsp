@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,16 +50,23 @@
 
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
+				<div class="sidebar-brand-icon">
+					<img src="/public/img/logo/white.png" alt="Love Music Logo" style="width: 50px; height: 50px;">
 				</div>
-				<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+				<div class="sidebar-brand-text mx-3">Love Music</div>
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item <%=urlSegments[1].equals("products") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/products/list.jsp">
+					<i class="fas fa-fw fa-guitar"></i>
+					<span>Products</span>
+				</a>
+			</li>
+
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 					aria-expanded="true" aria-controls="collapseTwo">
