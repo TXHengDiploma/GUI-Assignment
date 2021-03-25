@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +11,13 @@
 	<title>${param.pageTitle} - Coy Name</title>
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/jpg" href="Favicon_Image_Location"/>
+	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
 
 	<!-- Start CSS -->
 	<!-- Custom fonts for this template-->
-	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link href="/public/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 	<link href="/public/css/font.css" rel="stylesheet">
 	<link href="/public/css/app.css" rel="stylesheet">
 	<!-- End CSS -->
@@ -23,6 +26,11 @@
 	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
+	<script src="/public/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
+	<script src="/public/vendor/parsleyjs/parsley.min.js" defer></script>
+	<script src="/public/vendor/notify/notify.min.js"  defer></script>
+	<script src="/public/vendor/sweetalert2/dist/sweetalert2.all.min.js"  defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 
@@ -30,6 +38,7 @@
 
 <body id="page-top">
 
+	<form id="ajax-form"></form>
 	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal">
 	</div>
 
@@ -41,16 +50,23 @@
 
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
+				<div class="sidebar-brand-icon">
+					<img src="/public/img/logo/white.png" alt="Love Music Logo" style="width: 50px; height: 50px;">
 				</div>
-				<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+				<div class="sidebar-brand-text mx-3">Love Music</div>
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item <%=urlSegments[1].equals("products") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/products/list.jsp">
+					<i class="fas fa-fw fa-guitar"></i>
+					<span>Products</span>
+				</a>
+			</li>
+
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 					aria-expanded="true" aria-controls="collapseTwo">
@@ -88,33 +104,10 @@
 						<i class="fa fa-bars"></i>
 					</button>
 
+					<h3>${param.pageTitle}</h3>
+
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-
-						<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-						<li class="nav-item dropdown no-arrow d-sm-none">
-							<a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-search fa-fw"></i>
-							</a>
-							<!-- Dropdown - Messages -->
-							<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-								aria-labelledby="searchDropdown">
-								<form class="form-inline mr-auto w-100 navbar-search">
-									<div class="input-group">
-										<input type="text" class="form-control bg-light border-0 small"
-											placeholder="Search for..." aria-label="Search"
-											aria-describedby="basic-addon2">
-										<div class="input-group-append">
-											<button class="btn btn-primary" type="button">
-												<i class="fas fa-search fa-sm"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</li>
-
 						<!-- Nav Item - Alerts -->
 						<li class="nav-item dropdown no-arrow mx-1">
 							<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"

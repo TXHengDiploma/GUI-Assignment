@@ -14,7 +14,8 @@
 
 	<!-- Start CSS -->
 	<!-- Custom fonts for this template-->
-	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="/public/css/font.css" rel="stylesheet">
 	<link href="/public/css/app.css" rel="stylesheet">
 	<!-- End CSS -->
@@ -23,6 +24,7 @@
 	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 

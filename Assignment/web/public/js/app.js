@@ -133,7 +133,6 @@
           element.find('[data-toggle="tooltip"]').tooltip({
             container: 'body'
           });
-          resize_window();
         },
         error: function(err){
           var error = 'Internal Server Error';
@@ -155,4 +154,67 @@
     $(this).ajax_html();
   })
 
+  $(document).on('submit', 'form:not([no-ajax])', function(e) {
+    e.preventDefault();
+    let $form = $(this);
+    if ($form.data('cshid')) {
+        return true;
+    }
+    $.ajax({
+        url: $form.attr('action'),
+        type: $form.attr('method'),
+        data: $form.serialize(),
+        cache: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function() {
+            $("[type='submit']").addClass("btn-loading");
+            $("[type='submit']").prop("disabled", true);
+        },
+        success: function(response) {
+            $("[type='submit']").removeClass("btn-loading");
+            $("[type='submit']").prop("disabled", false);
+            if (response.hasOwnProperty('script')) {
+                eval(response.script);
+            }
+            if (response.hasOwnProperty('error')) {
+                eval(response.error);
+            }
+        },
+        error: function(response) {
+            $("[type='submit']").removeClass("btn-loading");
+            $("[type='submit']").prop("disabled", false);
+            if (response.readyState == 0) {
+                $.notify("Network Error", "danger");
+                return false;
+            }
+            if (response.status === 419) {
+                $.notify("Session expired", "danger");
+                return false;
+            }
+            if (response.status === 401) {
+                $.notify("Unauthorized", "danger");
+                return false;
+            }
+            if (response.status === 422) {
+                var errors = response.responseJSON.errors ? response.responseJSON.errors : response.responseJSON;
+                $.each(errors, function(key, value) {
+                    if ($form.data('error-notify')) {
+                        $.notify(value[0], "danger");
+                    } else {
+                        $form.find("[name='" + key + "']").parsley().reset();
+                        window.ParsleyUI.addError($form.find("[name='" + key + "']").parsley(), "ajax", value[0]);
+                    }
+                });
+                return false;
+            }
+            if ($form.data('error-reload')) {
+                location.reload();
+                return true;
+            }
+            $.notify("Connection Error", "danger");
+        }
+    });
+    return false;
+  });
 })(jQuery); // End of use strict
