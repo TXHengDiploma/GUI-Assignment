@@ -159,6 +159,12 @@
     $($(this).data('ajax-reload')).ajax_html();
   });
 
+  $(document).on('click', '[data-pagination-url]',function(e){
+    e.preventDefault();
+    $($(this).data("pagination-target")).data("ajax-html",$(this).data("pagination-url"));
+    $($(this).data("pagination-target")).ajax_html();
+  })
+
   $(document).on('submit', 'form:not([no-ajax])', function(e) {
     e.preventDefault();
     let $form = $(this);

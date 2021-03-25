@@ -107,7 +107,7 @@ public class Product extends DBConnect{
 			stmt.setString(3, product.getImageString());
 			stmt.setString(4, product.getDescription());
 			stmt.setBoolean(5, false);
-			
+
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -192,6 +192,43 @@ public class Product extends DBConnect{
 		sql = "SELECT * FROM products ORDER BY id DESC";
 		try {
 			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return products;
+	}
+
+	public static int count(){
+		connectDB();
+		sql = "SELECT COUNT(*) as total FROM products WHERE isDeleted=?";
+		int total = 0;
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setBoolean(1, false);
+			rs = stmt.executeQuery();
+			if(rs.next()){
+				total = rs.getInt("total");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return total;
+	}
+
+	public static ArrayList<Product> page(int page, int resultPerPage){
+		connectDB();
+		ArrayList<Product> products = new ArrayList<Product>();
+		sql = "SELECT * FROM products WHERE isDeleted=? OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+		try{
+			stmt = conn.prepareStatement(sql);
+			stmt.setBoolean(1, false);
+			stmt.setInt(2, ((page-1) * resultPerPage));
+			stmt.setInt(3, resultPerPage);
 
 			rs = stmt.executeQuery();
 			while(rs.next()){

@@ -10,7 +10,7 @@
 	<title>${param.pageTitle} - Coy Name</title>
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/jpg" href="Favicon_Image_Location"/>
+	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
 
 	<!-- Start CSS -->
 	<!-- Custom fonts for this template-->
@@ -21,7 +21,7 @@
 	<!-- End CSS -->
 
 	<!-- Start JavaScript -->
-	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
+	<script src="/public/vendor/jquery/jquery.min.js"></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
 	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
@@ -33,9 +33,9 @@
 <body>
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">Start Bootstrap</a>
+			<a class="navbar-brand" href="#"><img src="/public/img/logo/white.png" alt="Love Music Logo" style="width: 35px; height: 35px;" /> Love Music</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -48,13 +48,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">About</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Services</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
+						<a class="nav-link" href="#">Sign In / Sign Up</a>
 					</li>
 				</ul>
 			</div>
@@ -62,13 +56,13 @@
 	</nav>
 
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container" style="margin-top: 80px; min-height: 800px;">
 
-		<!-- Jumbotron Header -->
+		<%-- <!-- Jumbotron Header -->
 		<header class="jumbotron my-4">
 			<h1 class="display-3">A Warm Welcome!</h1>
 			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt
 				possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam
 				repellat.</p>
 			<a href="#" class="btn btn-primary btn-lg">Call to action!</a>
-		</header>
+		</header> --%>
