@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DBConnect {
-    private static String host = "jdbc:derby://localhost:1527/ecommercedb", user = "nbuser", password = "nbpassword";
+    private static String host = "jdbc:derby://localhost:1527/ecommercedb;sendStringParametersAsUnicode=false;", user = "nbuser", password = "nbpassword";
 	public static PreparedStatement stmt;
 	public static Connection conn;
 	public static String sql;

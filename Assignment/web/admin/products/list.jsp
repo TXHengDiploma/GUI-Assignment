@@ -3,6 +3,7 @@
 </jsp:include>
 <div class="card">
 	<div class="card-header">
+		<button data-ajax-reload="#product-table" class="btn btn-sm btn-default"><i class="fa fa-sync-alt"></i></button>
 		All Products
 		<div class="float-right">
 			<button data-ajax-modal="/admin/products/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add Product</button>

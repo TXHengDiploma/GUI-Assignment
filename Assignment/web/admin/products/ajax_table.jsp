@@ -3,28 +3,39 @@
 <% ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products"); %>
 <table class="product-table display w-100">
 	<thead>
+		<th> </th>
 		<th class="sorting">Name</th>
 		<th class="sorting">Price</th>
 		<th>Actions</th>
 	</thead>
 	<tbody>
-		<% for(Product product : products) { %> 
-                <tr>
-                    <td><%= product.getName() %></td>
-                    <td><%= String.format("%.2f",product.getPrice()) %></td>
-					<td>
-						<div class="btn-group">
+		<% if(products.size() != 0){ %>
+			<% for(Product product : products) { %> 
+			<tr>
+				<td class="text-center">
+					<% if(product.getImageString() == null) { %>
+							<i class="fa fa-guitar"></i>
+					<% } else { %>
+							<img src="<%= product.getImageString() %>" alt="Product Image" style="width: 40px; height: 40px;">
+					<% } %>
+				</td>
+				<td><%= product.getName() %></td>
+				<td><%= String.format("%.2f",product.getPrice()) %></td>
+				<td>
+					<div class="btn-group">
 							<button class="btn btn-secondary" data-ajax-modal="/admin/products/edit?id=<%= product.getId() %>"><i class="fa fa-edit"></i></button>
 							<button class="btn btn-danger" data-delete-id="<%= product.getId() %>"><i class="fa fa-trash-alt"></i></button>
-						</div>
-					</td>
-                </tr>
-                <% } %>
+					</div>
+				</td>
+			</tr>
+			<% } %>
+		<% } %>
 	</tbody>
 </table>
 <script defer>
     $(".product-table").DataTable({
 		"columns": [
+			{ "width": "3%", "orderable": false },
 			{ "width": "30%" },
 			{ "width": "30%" },
 			{ "width": "25%", "orderable": false },

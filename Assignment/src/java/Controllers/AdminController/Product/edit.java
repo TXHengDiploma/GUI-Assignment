@@ -27,13 +27,17 @@ public class edit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String name = request.getParameter("prod_name");
-        double price = Double.parseDouble(request.getParameter("prod_price"));
+		String name = request.getParameter("prod_name");
+		double price = Double.parseDouble(request.getParameter("prod_price"));
+		String imageString = request.getParameter("prod_img");
+		String description = request.getParameter("prod_desc");
 
 		Product product = Product.find(Integer.parseInt(request.getParameter("id")));
 		
 		product.setName(name);
 		product.setPrice(price);
+        product.setImageString(imageString);
+		product.setDescription(description);
         product.update();
 
         request.setCharacterEncoding("utf-8");

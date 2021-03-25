@@ -154,6 +154,11 @@
     $(this).ajax_html();
   })
 
+  $(document).on('click', '[data-ajax-reload]',function(e){
+    e.preventDefault();
+    $($(this).data('ajax-reload')).ajax_html();
+  });
+
   $(document).on('submit', 'form:not([no-ajax])', function(e) {
     e.preventDefault();
     let $form = $(this);

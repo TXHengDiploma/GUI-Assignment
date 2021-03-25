@@ -26,10 +26,11 @@ public class add extends HttpServlet {
 
         String name = request.getParameter("prod_name");
         double price = Double.parseDouble(request.getParameter("prod_price"));
-        Product product = new Product(name,price);
-
+        String imageString = request.getParameter("prod_img");
+        String description = request.getParameter("prod_desc");
+        Product product = new Product(name, price, imageString, description);
+        
         Product.create(product);
-
         request.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);

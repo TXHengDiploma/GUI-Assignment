@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Product extends DBConnect{
     
 	private int id, brandId, categoryId;
-	private String name;
+	private String name, imageString, description;
 	private double price;
 	private boolean isDeleted;
 
@@ -14,15 +14,19 @@ public class Product extends DBConnect{
 		isDeleted = false;
 	}
 
-	public Product(String name, double price){
+	public Product(String name, double price, String imageString, String description){
 		this.name = name;
 		this.price = price;
+		this.imageString = imageString;
+		this.description = description;
 	}
 
-	public Product(int id, String name, double price){
+	public Product(int id, String name, double price, String imageString, String description){
 		this.id = id;
 		this.name = name;
 		this.price = price;
+        this.imageString = imageString;
+		this.description = description;
 	}
 
 	public void setBrandId(int brandId) {
@@ -51,6 +55,24 @@ public class Product extends DBConnect{
 		this.price = price;
 	}
 
+	// image in base 64
+	public String getImageString() {
+			return imageString;
+	}
+	
+	public void setImageString(String imageString) {
+			this.imageString = imageString;
+	}
+
+	// Description
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	// Delete Product
 	public boolean getIsDeleted(){
 		return isDeleted;
@@ -76,13 +98,16 @@ public class Product extends DBConnect{
 
 	public static void create(Product product) {
 		connectDB();
-		sql = "INSERT INTO products (name, price) VALUES (?, ?)";
+		sql = "INSERT INTO products (name, price, image, description, isDeleted) VALUES (?, ?, ?, ?, ?)";
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, product.getName());
 			stmt.setDouble(2, product.getPrice());
-
+			stmt.setString(3, product.getImageString());
+			stmt.setString(4, product.getDescription());
+			stmt.setBoolean(5, false);
+			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -101,7 +126,7 @@ public class Product extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"));
+				product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -111,13 +136,15 @@ public class Product extends DBConnect{
 
 	public void update() {
 		connectDB();
-		sql = "UPDATE products SET name=?, price=? WHERE id=?";
+		sql = "UPDATE products SET name=?, price=?, image=?, description=? WHERE id=?";
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, name);
 			stmt.setDouble(2, price);
-			stmt.setInt(3, id);
+			stmt.setString(3, imageString);
+			stmt.setString(4, description);
+			stmt.setInt(5, id);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -151,7 +178,7 @@ public class Product extends DBConnect{
 
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price")));
+				products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description")));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -168,7 +195,7 @@ public class Product extends DBConnect{
 
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price")));
+				products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description")));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

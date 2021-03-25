@@ -9,14 +9,24 @@
 		<form action="/admin/products/add" method="post">
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="prod_name">Name: </label>
+					<label>Name: </label>
 					<input name="prod_name" type="text" class="form-control" placeholder="Enter Product Name" maxlength="100" required>
 				</div>
-			</div>
-			<div class="modal-body">
 				<div class="form-group">
-					<label for="prod_price">Price: </label>
-					<input name="prod_price" type="text" class="form-control" placeholder="Enter Product Price" required>
+					<label>Price: </label>
+					<input name="prod_price" type="text" class="form-control" placeholder="Enter Product Price" required pattern='[0-9]+(\\.[0-9][0-9]?)?'>
+				</div>
+				<div class="form-group">
+					<label for="prod_price">Description: </label>
+					<textarea name="prod_desc" cols="30" rows="10" class="form-control" placeholder="Enter Product Description"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Price: </label>
+					<input id="inp" type="file" class="form-control" accept="image/*">
+					<input name="prod_img" type="hidden" id="b64">
+					<div class="d-flex w-100 justify-content-center align-item-center">
+						<img id="img_preview" height="200" src="">
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -25,3 +35,16 @@
 		</form>
 	</div>
 </div>
+<script defer>
+function readFile() {
+	if (this.files && this.files[0]) {
+		var FR= new FileReader();
+		FR.addEventListener("load", function(e) {
+			document.getElementById("img_preview").src = e.target.result;
+			document.getElementById("b64").value = e.target.result;
+		}); 
+		FR.readAsDataURL( this.files[0] );
+	}
+}
+document.getElementById("inp").addEventListener("change", readFile);
+</script>
