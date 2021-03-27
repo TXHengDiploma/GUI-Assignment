@@ -48,7 +48,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Sign In / Sign Up</a>
+						<a class="nav-link" href="signup.jsp">Sign In / Sign Up</a>
 					</li>
 				</ul>
 			</div>
