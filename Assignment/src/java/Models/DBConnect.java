@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DBConnect {
-    private static String host = "jdbc:derby://localhost:1527/ecommercedb;sendStringParametersAsUnicode=false;", user = "nbuser", password = "nbpassword";
-	public static PreparedStatement stmt;
-	public static Connection conn;
-	public static String sql;
-	public static ResultSet rs;
+    protected static String host = "jdbc:derby://localhost:1527/ecommercedb;sendStringParametersAsUnicode=false;", user = "nbuser", password = "nbpassword";
+	protected static PreparedStatement stmt;
+	protected static Connection conn;
+	protected static String sql;
+	protected static ResultSet rs;
 
-	public static void connectDB() {
+	protected static void connectDB() {
 		try {
 			conn = DriverManager.getConnection(host, user, password);
 		} catch (Exception e) {

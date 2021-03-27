@@ -1,5 +1,5 @@
 <jsp:include page="/member/header.jsp">
-	<jsp:param name="pageTitle" value="Main Page"/>
+	<jsp:param name="pageTitle" value="Login"/>
 </jsp:include>
 <style>
   .login-form {
@@ -27,7 +27,7 @@
   </style>
   </head>
   <body>
-  <div class="login-form">
+  <div class="login-form d-block">
       <form action="/examples/actions/confirmation.php" method="post">
           <h2 class="text-center">Log in</h2>       
           <div class="form-group">
