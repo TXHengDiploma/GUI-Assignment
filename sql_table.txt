@@ -11,3 +11,13 @@ CREATE TABLE products
 	brandId INTEGER,
 	categoryId INTEGER
 );
+-- Category table
+
+CREATE TABLE categories
+(    
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),   
+	name VARCHAR(100),
+	icon VARCHAR(40),
+	description VARCHAR(255),
+	isDeleted BOOLEAN NOT NULL DEFAULT false
+);
