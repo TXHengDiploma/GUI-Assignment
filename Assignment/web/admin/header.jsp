@@ -67,6 +67,20 @@
 				</a>
 			</li>
 
+			<li class="nav-item <%=urlSegments[1].equals("categories") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/categories/list.jsp">
+					<i class="fas fa-fw fa-sitemap"></i>
+					<span>Categories</span>
+				</a>
+			</li>
+			
+			<li class="nav-item <%=urlSegments[1].equals("brands") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/brands/list.jsp">
+					<i class="fas fa-drum"></i>
+					<span>Brands</span>
+				</a>
+			</li>
+
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 					aria-expanded="true" aria-controls="collapseTwo">
