@@ -21,10 +21,14 @@
 	<!-- End CSS -->
 
 	<!-- Start JavaScript -->
-	<script src="/public/vendor/jquery/jquery.min.js"></script>
+	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
 	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
+	<script src="/public/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
+	<script src="/public/vendor/parsleyjs/parsley.min.js" defer></script>
+	<script src="/public/vendor/notify/notify.min.js"  defer></script>
+	<script src="/public/vendor/sweetalert2/dist/sweetalert2.all.min.js"  defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 
@@ -48,7 +52,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="signup.jsp">Sign In / Sign Up</a>
+						<a class="nav-link" href="/member/auth/login.jsp">Sign In / Sign Up</a>
 					</li>
 				</ul>
 			</div>

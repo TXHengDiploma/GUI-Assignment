@@ -26,23 +26,20 @@
   }
   </style>
 <div class="login-form">
-    <form action="#" method="#">
+    <form action="/member/auth/signup" method="post">
 		<h2>Sign Up</h2>
         <div class="form-group">
-        	<input type="text" class="form-control" name="username" placeholder="Username" required="required">
+        	<input type="text" class="form-control" name="member_name" placeholder="Username" required="required">
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        	<input type="email" class="form-control" name="member_email" placeholder="Email" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" name="member_password" placeholder="Password" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <input type="password" class="form-control" name="member_confirmpass" placeholder="Confirm Password" required="required">
         </div>        
-        <div class="form-group">
-			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
 		<div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
         </div>
