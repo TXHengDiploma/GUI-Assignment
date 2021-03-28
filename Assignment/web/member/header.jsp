@@ -30,8 +30,7 @@
 
 </head>
 
-<body>
-
+<body id="page-top">
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
@@ -48,7 +47,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Sign In / Sign Up</a>
+						<a class="nav-link" href="signup.jsp">Sign In / Sign Up</a>
 					</li>
 				</ul>
 			</div>
@@ -56,7 +55,7 @@
 	</nav>
 
 	<!-- Page Content -->
-	<div class="container" style="margin-top: 80px; min-height: 800px;">
+	<div class="container" style="padding-top: 60px; min-height: calc(100% - 70px);">
 
 		<%-- <!-- Jumbotron Header -->
 		<header class="jumbotron my-4">

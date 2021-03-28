@@ -1,29 +1,25 @@
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h5 class="modal-title">Add New Product</h5>
+			<h5 class="modal-title">Add New Brand</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-		<form action="/admin/products/add" method="post">
+		<form action="/admin/brands/add" method="post">
 			<div class="modal-body">
 				<div class="form-group">
 					<label>Name: </label>
-					<input name="prod_name" type="text" class="form-control" placeholder="Enter Product Name" maxlength="100" required>
+					<input name="brand_name" type="text" class="form-control" placeholder="Enter Brand Name" maxlength="100" required>
 				</div>
 				<div class="form-group">
-					<label>Price: </label>
-					<input name="prod_price" type="text" class="form-control" placeholder="Enter Product Price" required pattern='[0-9]+(\\.[0-9][0-9]?)?'>
-				</div>
-				<div class="form-group">
-					<label for="prod_price">Description: </label>
-					<textarea name="prod_desc" cols="30" rows="10" class="form-control" placeholder="Enter Product Description"></textarea>
+					<label for="brand_desc">Description: </label>
+					<textarea name="brand_desc" cols="30" rows="10" class="form-control" placeholder="Enter Brand Description"></textarea>
 				</div>
 				<div class="form-group">
 					<label>Image: </label>
 					<input id="inp" type="file" class="form-control" accept="image/*">
-					<input name="prod_img" type="hidden" id="b64">
+					<input name="brand_img" type="hidden" id="b64">
 					<div class="d-flex w-100 justify-content-center align-item-center">
 						<img id="img_preview" height="200" src="">
 					</div>

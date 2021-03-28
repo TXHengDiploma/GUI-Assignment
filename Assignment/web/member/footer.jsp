@@ -2,11 +2,16 @@
 		<!-- /.container -->
 
 		<!-- Footer -->
-		<footer class="py-5 bg-dark">
-			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Love Music 2020</p>
+		<footer class="sticky-footer bg-dark text-light">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; Love Music 2021</span>
+				</div>
 			</div>
-			<!-- /.container -->
 		</footer>
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top">
+			<i class="fas fa-angle-up"></i>
+		</a>
 	</body>
 </html>
