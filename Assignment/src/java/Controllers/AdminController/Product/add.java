@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Models.Brand;
+import Models.Category;
 import Models.Product;
 
 @WebServlet(name = "AdminProductAdd", urlPatterns = {"/admin/products/add"})
@@ -17,6 +19,8 @@ public class add extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("brands", Brand.all());
+        request.setAttribute("categories", Category.all());
         request.getRequestDispatcher("/admin/products/add_product.jsp").forward(request, response);
     }
 
@@ -28,7 +32,9 @@ public class add extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("prod_price"));
         String imageString = request.getParameter("prod_img");
         String description = request.getParameter("prod_desc");
-        Product product = new Product(name, price, imageString, description);
+        int brandId = Integer.parseInt(request.getParameter("prod_brand"));
+        int categoryId = Integer.parseInt(request.getParameter("prod_category"));
+        Product product = new Product(name, price, imageString, description, brandId, categoryId);
         
         Product.create(product);
         request.setCharacterEncoding("utf-8");

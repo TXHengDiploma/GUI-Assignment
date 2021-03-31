@@ -6,15 +6,11 @@
 </jsp:include>
 
 <!-- Page Features -->
-
+<script src="/public/vendor/input-spinner/input-spinner.js"></script>
 <div class="container" id="product-section">
-	<script src="./src/input-spinner.js"></script>
-<script>
-    $("input[type='number']").inputSpinner()
-</script>
 	<div class="row">
 		<div class="col-md-6">
-			<img class="img-thumbnail w-100 rounded"  src="<%= product.getImageString() != null ? product.getImageString() : "/public/img/no_pic.svg" %>" alt="Image of <%= product.getName() %>" >
+			<img class="img-thumbnail w-100 rounded" src="<%= product.getImageString() != null ? product.getImageString() : "/public/img/no_pic.svg" %>" alt="Image of <%= product.getName() %>" >
 		</div>
 		<div class="col-md-6">
 			<div class="row">
@@ -42,6 +38,9 @@
 		</div>
 	</div>
 </div>
-
-
+<script defer>
+	$(document).ready(function () {
+		$("input[type='number']").inputSpinner({});
+	})
+</script>
 <jsp:include page="/member/footer.jsp"/>
