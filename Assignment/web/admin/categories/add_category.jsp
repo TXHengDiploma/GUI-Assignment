@@ -17,7 +17,7 @@
 					<textarea name="cate_desc" cols="30" rows="10" class="form-control" placeholder="Enter Category Description"required></textarea>
 				</div>
                 <div class="form-group">
-					<label>Icon: </label>
+					<label>Icon: </label><i id="icon-preview" class="fa fa-eye"></i>
 					<input name="cate_icon" type="text" class="form-control" placeholder="Enter Category Icon" value="" required>
 				</div>
 			</div>
@@ -28,5 +28,9 @@
 	</div>
 </div>
 <script defer>
-
+	$('[name="cate_icon"]').keyup(function (e) { 
+		$('#icon-preview').removeClass();
+		$('#icon-preview').addClass('fa');
+		$('#icon-preview').addClass('fa-'+$(this).val());
+	});
 </script>

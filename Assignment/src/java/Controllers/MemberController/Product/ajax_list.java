@@ -22,18 +22,18 @@ public class ajax_list extends HttpServlet {
         
         String query = "";
         if(request.getParameter("filter") != null){
-            String filters[] = request.getParameter("filter").split("||");
+            String filters[] = request.getParameter("filter").split("@");
             for(int i = 0; i < filters.length; i++){
                 query += filters[i];
                 if(i != filters.length - 1){
-                    query += "AND ";
+                    query += " AND ";
                 }
             }
         }
         
         if(request.getParameter("search") != null){
             if(query.length() != 0){
-                query += "AND ";
+                query += " AND ";
             }
 
             query += "( LOWER(name) LIKE '%" + request.getParameter("search").toLowerCase()+"%' OR LOWER(description) LIKE '%" + request.getParameter("search").toLowerCase()+"%' )";

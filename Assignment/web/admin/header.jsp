@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Models.Admin"%>
-<% Admin admin = (Admin) session.getAttribute("admin"); %>
+<% Admin admin = session.getAttribute("admin") != null ? (Admin) session.getAttribute("admin") : Admin.find(1000); %>
 <% String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); %>
 <!DOCTYPE html>
 <html lang="en">
