@@ -1,7 +1,7 @@
 package Models;
 
 import java.sql.SQLException;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Member extends DBConnect{
     
@@ -144,23 +144,23 @@ public class Member extends DBConnect{
 	// 	}
 	// }
 
-	// public static ArrayList<Product> all() {
-	// 	connectDB();
-	// 	ArrayList<Product> products = new ArrayList<Product>();
-	// 	sql = "SELECT * FROM products WHERE isDeleted=? ORDER BY id DESC";
-	// 	try {
-	// 		stmt = conn.prepareStatement(sql);
-	// 		stmt.setBoolean(1, false);
+	public static ArrayList<Member> all() {
+		connectDB();
+		ArrayList<Member> members = new ArrayList<Member>();
+		sql = "SELECT * FROM members ";//WHERE isDeleted=? ORDER BY id DESC
+		try {
+			stmt = conn.prepareStatement(sql);
+			// stmt.setBoolean(1, false);
 
-	// 		rs = stmt.executeQuery();
-	// 		while(rs.next()){
-	// 			products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description")));
-	// 		}
-	// 	} catch (SQLException e) {
-	// 		System.out.println(e.getMessage());
-	// 	}
-	// 	return products;
-	// }
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				members.add(new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return members;
+	}
 
 	// public static ArrayList<Product> allWithDeleted(){
 	// 	connectDB();

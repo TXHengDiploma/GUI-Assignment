@@ -81,6 +81,13 @@
 				</a>
 			</li>
 
+			<li class="nav-item <%=urlSegments[1].equals("admins") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/auth/signup.jsp">
+					<i class="fas fa-user-plus"></i>
+					<span>Add New Admin</span>
+				</a>
+			</li>
+
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 					aria-expanded="true" aria-controls="collapseTwo">

@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import Models.Admin;
 
-@WebServlet(name = "MemberLogin", urlPatterns = {"/member/auth/login"})
+@WebServlet(name = "AdminLogin", urlPatterns = {"/admin/auth/login"})
 public class login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/member/auth/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin/auth/login.jsp").forward(request, response);
     }
 
     @Override
@@ -25,22 +25,22 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
             PrintWriter out = response.getWriter();
             
-            Member member = Member.findByEmail(request.getParameter("memberemail"));
+            Admin admin = Admin.findByEmail(request.getParameter("admin_email"));
             
-            if(member == null)
+            if(admin == null)
             {
                 JsonObjectBuilder job = Json.createObjectBuilder()
                 .add("script", "Swal.fire({title: 'Opps...', text: 'Please type something...', icon: 'error'})");
                 out.print(job.build().toString());
                 return;
             }
-            if(member.getPassword().equals(request.getParameter("memberpassword")))
+            if(admin.getPassword().equals(request.getParameter("admin_pass")))
             {
                 request.setCharacterEncoding("utf-8");
                 response.setContentType("application/json");
                 response.setStatus(HttpServletResponse.SC_OK);
                 JsonObjectBuilder job = Json.createObjectBuilder()
-                        .add("script", "Swal.fire({title: 'Completed', text: 'Login Successfully', icon: 'success'})");
+                        .add("script", "Swal.fire({title: 'Completed', text: 'Login Successfully', icon: 'success'}).then(()=>{location.href='/admin/products/list.jsp'})");
                 out.print(job.build().toString());
                 return;
             }else
@@ -53,11 +53,6 @@ public class login extends HttpServlet {
 
             
             }
-            
-        }
-        
-    }
-
     @Override
     public String getServletInfo() {
         return "Short description";

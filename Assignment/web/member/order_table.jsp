@@ -1,5 +1,5 @@
 <jsp:include page="/member/header.jsp">
-	<jsp:param name="pageTitle" value="Main Page"/>
+	<jsp:param name="pageTitle" value="My Cart"/>
 </jsp:include>
 <table class="product-table display w-100">
 	<thead>
@@ -28,11 +28,11 @@
     </tbody>
   
 </table>
-
+<form method="GET" action="/payment.jsp#">
 <div class="float-right">
 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="back"><i class="fas fa-cart-plus"></i> Continue Shopping
 </button>
-<button class="btn btn-primary" type="button">Payment</i></button>
+<button class="btn btn-primary" type="submit">Payment</i></button>
 </div>
-
+</form>
 <jsp:include page="/member/footer.jsp"/>
