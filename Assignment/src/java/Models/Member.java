@@ -1,5 +1,7 @@
 package Models;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 // import java.util.ArrayList;
 
@@ -53,6 +55,33 @@ public class Member extends DBConnect{
         this.password = password;
     }
 
+	// Verify Member
+	public boolean auth(){
+		Member searchMember = find(id);
+		if(searchMember != null){
+			return searchMember.getPassword().equals(password);
+		}
+		return false;
+	}
+
+	public static String hashPassword(String password){
+
+		String result = "";
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+			messageDigest.update(password.getBytes());
+			byte[] resultByteArr = messageDigest.digest();
+			StringBuilder sb = new StringBuilder();
+			for(byte b : resultByteArr){
+				sb.append(String.format("%02x", b));
+			}
+			result = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
     //Create Member
 	public static void create(Member member) {
 		connectDB();
@@ -62,7 +91,7 @@ public class Member extends DBConnect{
 
 			stmt.setString(1, member.getName());
 			stmt.setString(2, member.getEmail());
-			stmt.setString(3, member.getPassword());
+			stmt.setString(3, hashPassword(member.getPassword()));
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {

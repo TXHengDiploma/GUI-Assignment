@@ -39,7 +39,7 @@ public class ajax_list extends HttpServlet {
             query += "( LOWER(name) LIKE '%" + request.getParameter("search").toLowerCase()+"%' OR LOWER(description) LIKE '%" + request.getParameter("search").toLowerCase()+"%' )";
         }
 
-        if(query.length() != 6){
+        if(query.length() != 0){
             System.out.println(query);
             products = Product.filter(query);
         } else {

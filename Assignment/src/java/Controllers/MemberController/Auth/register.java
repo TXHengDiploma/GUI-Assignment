@@ -14,47 +14,52 @@ import Models.Member;
 @WebServlet(name = "MemberAdd", urlPatterns = {"/member/auth/signup"})
 public class register extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("/member/auth/signup.jsp").forward(request, response);
-    }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/member/auth/signup.jsp").forward(request, response);
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            PrintWriter out = response.getWriter();
-            
-            if(!request.getParameter("member_password").equals(request.getParameter("member_confirmpass")))
-            {
-                JsonObjectBuilder job = Json.createObjectBuilder()
-                .add("script", "Swal.fire({title: 'Opps...', text: 'Create Fail!', icon: 'error'})");
-                out.print(job.build().toString());
-                return;
-            }
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		
+		if(!request.getParameter("member_password").equals(request.getParameter("member_confirmpass")))
+		{
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/json");
+			response.setStatus(HttpServletResponse.SC_OK);
+			JsonObjectBuilder job = Json.createObjectBuilder()
+			.add("script", "Swal.fire({title: 'Opps...', text: 'Your password isn\'t same, please try again.', icon: 'error'})");
+			out.print(job.build().toString());
+			return;
+		}
 
-            String name = request.getParameter("member_name");
-            String email = request.getParameter("member_email");
-            String password = request.getParameter("member_password");
-            Member member = new Member(name, email, password);
-
-            Member.create(member);
-            request.setCharacterEncoding("utf-8");
-            response.setContentType("application/json");
-            response.setStatus(HttpServletResponse.SC_OK);
-            JsonObjectBuilder job = Json.createObjectBuilder()
-                    .add("script", "Swal.fire({title: 'Completed', text: 'Create Successfully', icon: 'success'})");
-            out.print(job.build().toString());
-            }
-            
-        }
-        
+		if(Member.findByEmail(request.getParameter("member_email")) != null){
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/json");
+			response.setStatus(HttpServletResponse.SC_OK);
+			JsonObjectBuilder job = Json.createObjectBuilder()
+			.add("script", "Swal.fire({title: 'Opps...', text: 'This e-mail has been used by other user, please try another', icon: 'error'})");
+			out.print(job.build().toString());
+			return;
+		}
 
 
-    }
+		Member member = new Member(request.getParameter("member_name"), request.getParameter("member_email"), request.getParameter("member_password"));
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
+		Member.create(member);
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_OK);
+		JsonObjectBuilder job = Json.createObjectBuilder()
+				.add("script", "Swal.fire({title: 'Completed', text: 'Create Successfully', icon: 'success'}).then(()=>{location.href='/member/auth/login'})");
+		out.print(job.build().toString());
+	}
+
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}   
 }

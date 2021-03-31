@@ -23,24 +23,23 @@
 	<!-- End CSS -->
 
 	<!-- Start JavaScript -->
-	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
+	<script src="/public/vendor/jquery/jquery.min.js"></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
 	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
 	<script src="/public/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
 	<script src="/public/vendor/parsleyjs/parsley.min.js" defer></script>
 	<script src="/public/vendor/notify/notify.min.js"  defer></script>
-	<script src="/public/vendor/sweetalert2/dist/sweetalert2.all.min.js"  defer></script>
+	<script src="/public/vendor/sweetalert2/dist/sweetalert2.min.js"  defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="h-100">
 
 	<form id="ajax-form"></form>
-	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal">
-	</div>
+	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal"></div>
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
