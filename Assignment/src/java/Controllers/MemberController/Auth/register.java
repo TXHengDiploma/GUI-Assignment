@@ -57,9 +57,4 @@ public class register extends HttpServlet {
 				.add("script", "Swal.fire({title: 'Completed', text: 'Create Successfully', icon: 'success'}).then(()=>{location.href='/member/auth/login'})");
 		out.print(job.build().toString());
 	}
-
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}   
 }

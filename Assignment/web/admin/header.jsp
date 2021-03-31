@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Models.Admin"%>
+<% Admin admin = (Admin) session.getAttribute("admin"); %>
 <% String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,9 +81,9 @@
 					<span>Brands</span>
 				</a>
 			</li>
-
-			<li class="nav-item <%=urlSegments[1].equals("admins") ? "active" : ""%>">
-				<a class="nav-link collapsed" href="/admin/auth/signup.jsp">
+			
+			<li class="nav-item <%= urlSegments[1].equals("auth") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/auth/signup">
 					<i class="fas fa-user-plus"></i>
 					<span>Add New Admin</span>
 				</a>
@@ -192,7 +194,7 @@
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= admin.getName() %></span>
 								<img class="img-profile rounded-circle" src="/public/img/undraw_profile.svg">
 							</a>
 							<!-- Dropdown - User Information -->
@@ -203,7 +205,7 @@
 									Profile 
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+								<a class="dropdown-item" data-logout="/admin/auth/logout">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
 								</a>

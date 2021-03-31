@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Category extends DBConnect{
     
-    private int id, brandId, categoryId;
+    private int id;
 	private String name, icon, description;
 	private boolean isDeleted;
 

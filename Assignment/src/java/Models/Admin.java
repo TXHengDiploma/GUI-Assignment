@@ -1,5 +1,7 @@
 package Models;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class Admin extends DBConnect{
@@ -52,7 +54,34 @@ public class Admin extends DBConnect{
         this.password = password;
     }
 
-    //Create Member
+	// Verify Admin
+	public boolean auth(){
+		Admin searchMember = find(id);
+		if(searchMember != null){
+			return searchMember.getPassword().equals(password);
+		}
+		return false;
+	}
+
+	public static String hashPassword(String password){
+
+		String result = "";
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+			messageDigest.update(password.getBytes());
+			byte[] resultByteArr = messageDigest.digest();
+			StringBuilder sb = new StringBuilder();
+			for(byte b : resultByteArr){
+				sb.append(String.format("%02x", b));
+			}
+			result = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+    //Create Admin
 	public static void create(Admin admin) {
 		connectDB();
 		sql = "INSERT INTO admins (name, email, password) VALUES (?, ?, ?)";
@@ -61,7 +90,7 @@ public class Admin extends DBConnect{
 
 			stmt.setString(1, admin.getName());
 			stmt.setString(2, admin.getEmail());
-			stmt.setString(3, admin.getPassword());
+			stmt.setString(3, hashPassword(admin.getPassword()));
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {

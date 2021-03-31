@@ -1,4 +1,4 @@
-package Controllers.AdminController.Auth;
+package Controllers.MemberController.Auth;
 
 import javax.json.*;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Models.Admin;
+import Models.Member;
 
 @WebServlet(name = "MemberLogin", urlPatterns = {"/member/auth/login"})
 public class login extends HttpServlet {
@@ -47,7 +47,7 @@ public class login extends HttpServlet {
 		if(member == null) {
 			returnScript = "Swal.fire({title: 'Opps...', text: 'This e-mail is not registered before, do you want to create an account?', icon: 'error'})";
 		} else if(!member.getPassword().equals(Member.hashPassword(request.getParameter("memberpassword")))) {
-			returnScript = "Swal.fire({title: 'Opps...', text: 'Invalid Password! ', icon: 'error'})";
+			returnScript = "Swal.fire({title: 'Opps...', text: 'Wrong Password!', icon: 'error'})";
 		} else {
 			request.getSession().invalidate();
 			request.getSession().setAttribute("member", member);
@@ -57,9 +57,4 @@ public class login extends HttpServlet {
 			.add("script", returnScript);
 			out.print(job.build().toString());
 	}
-
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}   
 }
