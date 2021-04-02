@@ -1,6 +1,10 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="Models.Product"%>
-<% Product product = (Product) request.getAttribute("product"); %>
+<%@page import="Models.Product, Models.Brand, Models.Category"%>
+<% 
+	Product product = (Product) request.getAttribute("product"); 
+	Brand brand = product.getBrand();
+	Category category = product.getCategory();
+%>
 <jsp:include page="/member/header.jsp">
 	<jsp:param name="pageTitle" value="Product Detail Page"/>
 </jsp:include>
@@ -19,7 +23,8 @@
 					<hr>
 					<b><p class="card-text"><%= product.getDescription() %></p></b>
 					<!-- display product catagory -->
-					<p>Categories: <a href="#" >piano</a> </p>
+					<p>Category: <a href="/member/products/list.jsp?filter=categoryId=<%= product.getCategoryId() %>" target="_blank" class="btn btn-primary"><i class="fa fa-<%= category.getIcon() %>"></i> <%= category.getName() %></a></p>
+					<p>Brand: <a href="/member/products/list.jsp?filter=brandId=<%= product.getBrandId() %>" target="_blank" class="btn btn-primary"><%= brand.getName() %></a></p>
 					<p class="card-text">RM <%= String.format("%.2f",product.getPrice()) %></p>
 					
 

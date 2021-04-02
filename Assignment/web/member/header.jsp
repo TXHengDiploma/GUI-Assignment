@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Models.Member"%>
-<% Member member = session.getAttribute("member") != null && session.getAttribute("member") != "" && session.getAttribute("member") != "null" ? (Member) session.getAttribute("member") : null; %>
+<% Member member = session.getAttribute("member") != null ? (Member) session.getAttribute("member") : null; %>
 <!DOCTYPE html>
 <html lang="en">
 
