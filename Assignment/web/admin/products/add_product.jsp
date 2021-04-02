@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="Models.Brand"%>
+<%@page import="Models.Category"%>
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -19,6 +22,24 @@
 				<div class="form-group">
 					<label for="prod_price">Description: </label>
 					<textarea name="prod_desc" cols="30" rows="10" class="form-control" placeholder="Enter Product Description"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Brand: </label>
+					<select name="prod_brand" required class="form-control">
+						<option value="">-- Select One Brand --</option>
+						<% for(Brand brand : (ArrayList<Brand>) request.getAttribute("brands")){ %>
+							<option value="<%= brand.getId() %>"><%= brand.getName() %></option>
+						<% } %>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Category: </label>
+					<select name="prod_category" required class="form-control">
+						<option value="">-- Select One Category --</option>
+						<% for(Category category : (ArrayList<Category>) request.getAttribute("categories")){ %>
+							<option value="<%= category.getId() %>"><%= category.getName() %></option>
+						<% } %>
+					</select>
 				</div>
 				<div class="form-group">
 					<label>Image: </label>

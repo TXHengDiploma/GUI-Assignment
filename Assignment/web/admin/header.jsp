@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Models.Admin"%>
+<% Admin admin = session.getAttribute("admin") != null ? (Admin) session.getAttribute("admin") : Admin.find(1000); %>
 <% String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,24 +25,23 @@
 	<!-- End CSS -->
 
 	<!-- Start JavaScript -->
-	<script src="/public/vendor/jquery/jquery.min.js" defer></script>
+	<script src="/public/vendor/jquery/jquery.min.js"></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
 	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
 	<script src="/public/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
 	<script src="/public/vendor/parsleyjs/parsley.min.js" defer></script>
 	<script src="/public/vendor/notify/notify.min.js"  defer></script>
-	<script src="/public/vendor/sweetalert2/dist/sweetalert2.all.min.js"  defer></script>
+	<script src="/public/vendor/sweetalert2/dist/sweetalert2.min.js"  defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="h-100">
 
 	<form id="ajax-form"></form>
-	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal">
-	</div>
+	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal"></div>
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
@@ -78,6 +79,13 @@
 				<a class="nav-link collapsed" href="/admin/brands/list.jsp">
 					<i class="fas fa-drum"></i>
 					<span>Brands</span>
+				</a>
+			</li>
+			
+			<li class="nav-item <%= urlSegments[1].equals("auth") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/auth/signup">
+					<i class="fas fa-user-plus"></i>
+					<span>Add New Admin</span>
 				</a>
 			</li>
 
@@ -186,7 +194,7 @@
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= admin.getName() %></span>
 								<img class="img-profile rounded-circle" src="/public/img/undraw_profile.svg">
 							</a>
 							<!-- Dropdown - User Information -->
@@ -197,7 +205,7 @@
 									Profile 
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+								<a class="dropdown-item" data-logout="/admin/auth/logout">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
 								</a>

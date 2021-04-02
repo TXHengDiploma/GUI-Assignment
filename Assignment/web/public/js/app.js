@@ -163,7 +163,7 @@
     e.preventDefault();
     $($(this).data("pagination-target")).data("ajax-html",$(this).data("pagination-url"));
     $($(this).data("pagination-target")).ajax_html();
-  })
+  });
 
   $(document).on('submit', 'form:not([no-ajax])', function(e) {
     e.preventDefault();
@@ -227,5 +227,12 @@
         }
     });
     return false;
+  });
+
+  $(document).on('click','[data-logout]',function(e){
+    e.preventDefault();
+    $('#ajax-form').attr('action',$(this).data('logout'));
+    $('#ajax-form').attr('method','POST');
+    $("#ajax-form").trigger('submit');
   });
 })(jQuery); // End of use strict

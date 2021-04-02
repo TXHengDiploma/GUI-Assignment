@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Models.Member"%>
+<% Member member = session.getAttribute("member") != null && session.getAttribute("member") != "" && session.getAttribute("member") != "null" ? (Member) session.getAttribute("member") : null; %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +18,7 @@
 	<!-- Custom fonts for this template-->
 	<link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 	<link href="/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link href="/public/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 	<link href="/public/css/font.css" rel="stylesheet">
 	<link href="/public/css/app.css" rel="stylesheet">
 	<!-- End CSS -->
@@ -25,12 +28,18 @@
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	<script src="/public/vendor/jquery-easing/jquery.easing.min.js" defer></script>
 	<script src="/public/vendor/datatables/jquery.dataTables.min.js" defer></script>
+	<script src="/public/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
+	<script src="/public/vendor/parsleyjs/parsley.min.js" defer></script>
+	<script src="/public/vendor/notify/notify.min.js"  defer></script>
+	<script src="/public/vendor/sweetalert2/dist/sweetalert2.min.js"  defer></script>
 	<script src="/public/js/app.js" defer></script>
 	<!-- End JavaScript -->
 
 </head>
 
 <body id="page-top">
+	<form id="ajax-form"></form>
+	<div class="modal" tabindex="-1" role="dialog" id="ajax-modal"></div>
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
@@ -46,16 +55,30 @@
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="signup.jsp">Sign In / Sign Up</a>
-					</li>
+					<% if(member == null){ %>
+						<li class="nav-item">
+							<a class="nav-link" href="/member/auth/login">Sign In / Sign Up</a>
+						</li>
+					<% } else { %>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="member-profile-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Welcome, ${member.name}
+							</a>
+							<div class="dropdown-menu" aria-labelledby="member-profile-dropdown">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">My Profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" data-logout="/member/auth/logout">Logout</a>
+							</div>
+						</li>
+					<% } %>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<!-- Page Content -->
-	<div class="container" style="padding-top: 60px; min-height: calc(100% - 70px);">
+	<div class="container" style="padding-top: 80px; min-height: calc(100% - 85px);">
 
 		<%-- <!-- Jumbotron Header -->
 		<header class="jumbotron my-4">

@@ -1,17 +1,4 @@
--- Product table
-
-CREATE TABLE products
-(    
-	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),   
-	name VARCHAR(100),
-	price DOUBLE,
-	image LONG VARCHAR,
-	description VARCHAR(255),
-	isDeleted BOOLEAN NOT NULL DEFAULT false,
-	brandId INTEGER,
-	categoryId INTEGER
-);
--- Category table
+-- Category Table
 
 CREATE TABLE categories
 (    
@@ -22,6 +9,7 @@ CREATE TABLE categories
 	isDeleted BOOLEAN NOT NULL DEFAULT false
 );
 
+-- Brand Table
 
 CREATE TABLE brands
 (    
@@ -30,4 +18,41 @@ CREATE TABLE brands
 	image LONG VARCHAR,
 	description VARCHAR(255),
 	isDeleted BOOLEAN NOT NULL DEFAULT false
+);
+
+-- Product Table
+
+CREATE TABLE products
+(    
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),   
+	name VARCHAR(100),
+	price DOUBLE,
+	image LONG VARCHAR,
+	description VARCHAR(255),
+	isDeleted BOOLEAN NOT NULL DEFAULT false,
+	brandId INTEGER,
+	categoryId INTEGER,
+	FOREIGN KEY (brandId) REFERENCES brands(id),
+	FOREIGN KEY (categoryId) REFERENCES categories(id)
+);
+
+-- Admin Table
+
+CREATE TABLE admins
+(    
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1000, INCREMENT BY 1),   
+	name VARCHAR(60),
+	role VARCHAR(20),
+	email VARCHAR(100),
+	password VARCHAR(100)
+);
+
+-- Member Table
+
+CREATE TABLE members
+(    
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1000, INCREMENT BY 1),   
+	name VARCHAR(60),
+	email VARCHAR(100),
+	password VARCHAR(100)
 );
