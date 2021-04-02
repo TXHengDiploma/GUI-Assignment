@@ -171,32 +171,32 @@ public class Brand extends DBConnect{
 		return brands;
 	}
 
-	public static int count(){
-		connectDB();
-		sql = "SELECT COUNT(*) as total FROM brands WHERE isDeleted=?";
-		int total = 0;
-		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setBoolean(1, false);
-			rs = stmt.executeQuery();
-			if(rs.next()){
-				total = rs.getInt("total");
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return total;
-	}
-
-	public static ArrayList<Brand> page(int page, int resultPerPage){
+	public static ArrayList<Brand> page(int page, int resultPerPage, String query){
 		connectDB();
 		ArrayList<Brand> brands = new ArrayList<Brand>();
-		sql = "SELECT * FROM brands WHERE isDeleted=? OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+		sql = "SELECT * FROM brands WHERE isDeleted=? "+(query.length() == 0 ? "" : "AND " + query)+" OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 		try{
 			stmt = conn.prepareStatement(sql);
 			stmt.setBoolean(1, false);
 			stmt.setInt(2, ((page-1) * resultPerPage));
 			stmt.setInt(3, resultPerPage);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				brands.add(new Brand(rs.getInt("id"), rs.getString("name"), rs.getString("image"), rs.getString("description")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return brands;
+	}
+
+	public static ArrayList<Brand> filter(String query){
+		connectDB();
+		ArrayList<Brand> brands = new ArrayList<Brand>();
+		sql = "SELECT * FROM brands WHERE " + query;
+		try{
+			stmt = conn.prepareStatement(sql);
 
 			rs = stmt.executeQuery();
 			while(rs.next()){
