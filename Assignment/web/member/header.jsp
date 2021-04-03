@@ -60,6 +60,9 @@
 							<a class="nav-link" href="/member/auth/login">Sign In / Sign Up</a>
 						</li>
 					<% } else { %>
+						<li class="nav-item">
+							<a class="nav-link" href="/member/myCart"><i class="fa fa-shopping-cart"></i></a>
+						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="member-profile-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Welcome, ${member.name}

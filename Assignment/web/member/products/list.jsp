@@ -35,7 +35,7 @@
 	</div>
 </div>
 <!-- Page Features -->
-<div id="product-list" data-ajax-html="/member/products/ajax_list" data-default-ajax-html="/member/products/ajax_list"></div>
+<div id="product-list" data-ajax-html="/member/products/ajax_list?<%= request.getParameter("search") != null ? "search=" + request.getParameter("search") + "&" : "" %><%= request.getParameter("filter") != null ? "filter=" + request.getParameter("filter") + "&" : "" %>"></div>
 <jsp:include page="/member/footer.jsp"/>
 <script defer>
 	let search = ()=>{
@@ -66,4 +66,11 @@
 	
 	$('[name="category"]').change(()=>search());
 	$('[name="brand"]').change(()=>search());
+
+	$(document).on('click', '[data-add-to-cart]', function(e){
+		e.preventDefault();
+		$('#ajax-form').attr('action', $(this).data('add-to-cart'));
+		$('#ajax-form').attr('method', 'POST');
+		$('#ajax-form').submit();
+	})
 </script>

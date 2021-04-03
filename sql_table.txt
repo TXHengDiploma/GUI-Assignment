@@ -56,3 +56,14 @@ CREATE TABLE members
 	email VARCHAR(100),
 	password VARCHAR(100)
 );
+
+-- Cart Table
+CREATE TABLE carts
+(
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	memberId INTEGER,
+	productId INTEGER,
+	quantity INTEGER,
+	FOREIGN KEY (memberId) REFERENCES members(id),
+	FOREIGN KEY (productId) REFERENCES products(id)
+);

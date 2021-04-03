@@ -244,4 +244,22 @@ public class Member extends DBConnect{
 	// 	}
 	// 	return products;
 	// }
+
+	public void addToCart(int productId, int quantity){
+		Cart.create(id,productId,quantity);
+	}
+
+	public ArrayList<Cart> myCart(){
+		return Cart.all(id);
+	}
+
+	public void deleteFromCart(int cartId){
+		Cart.delete(id, cartId);
+	}
+
+	public void updateCart(int cartId, int quantity){
+		Cart cart = Cart.findByCartId(id, cartId);
+		cart.setQuantity(quantity);
+		cart.update();
+	}
 }
