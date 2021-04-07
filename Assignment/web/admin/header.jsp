@@ -82,12 +82,12 @@
 				</a>
 			</li>
 			
-			<li class="nav-item <%= urlSegments[1].equals("auth") ? "active" : ""%>">
-				<a class="nav-link collapsed" href="/admin/auth/signup">
-					<i class="fas fa-user-plus"></i>
-					<span>Add New Admin</span>
-				</a>
-			</li>
+				<li class="nav-item <%= urlSegments[1].equals("auth") ? "active" : ""%>">
+					<a class="nav-link collapsed" href="/admin/auth/signup">
+						<i class="fas fa-user-plus"></i>
+						<span>Add New Admin</span>
+					</a>
+				</li>
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
