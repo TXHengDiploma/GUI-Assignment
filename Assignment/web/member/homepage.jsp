@@ -2,14 +2,6 @@
 	<jsp:param name="pageTitle" value="Main Page"/>
 </jsp:include>
 
-<script>
-        $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip({placement: "right"});   
-        });
-
-
-</script>
-
 <div id="carouselExampleControls" class="carousel slide mb-25" data-ride="carousel" data-interval="1500">
     <div class="carousel-inner w-70 ">
         <div class="carousel-item active">

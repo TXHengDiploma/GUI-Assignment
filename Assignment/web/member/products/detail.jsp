@@ -1,6 +1,10 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="Models.Product"%>
-<% Product product = (Product) request.getAttribute("product"); %>
+<%@page import="Models.Product, Models.Brand, Models.Category"%>
+<% 
+	Product product = (Product) request.getAttribute("product"); 
+	Brand brand = product.getBrand();
+	Category category = product.getCategory();
+%>
 <jsp:include page="/member/header.jsp">
 	<jsp:param name="pageTitle" value="Product Detail Page"/>
 </jsp:include>
@@ -19,20 +23,16 @@
 					<hr>
 					<b><p class="card-text"><%= product.getDescription() %></p></b>
 					<!-- display product catagory -->
-					<p>Categories: <a href="#" >piano</a> </p>
+					<p>Category: <a href="/member/products/list.jsp?filter=categoryId=<%= product.getCategoryId() %>" target="_blank" class="btn btn-primary"><i class="fa fa-<%= category.getIcon() %>"></i> <%= category.getName() %></a></p>
+					<p>Brand: <a href="/member/products/list.jsp?filter=brandId=<%= product.getBrandId() %>" target="_blank" class="btn btn-primary"><%= brand.getName() %></a></p>
 					<p class="card-text">RM <%= String.format("%.2f",product.getPrice()) %></p>
 					
-
 					<div class="form-group" style="width:250px">
 						<p>Quantity :</p>
-					<input type="number" value="1" min="1" max="100" step="1"/>
+						<input type="number" name="quantity" value="1" min="1" max="100" step="1"/>
 					</div>
-					
-					
-					<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Add To Cart"><i class="fas fa-cart-plus"></i> Add To Cart
-					</button>
+					<button data-add-to-cart="<%= product.getId() %>" type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Add To Cart"><i class="fas fa-cart-plus"></i> Add To Cart</button>
 					<button class="btn btn-primary" type="button">Buy Now!</i></button>
-
 				</div>
 			</div>
 		</div>
@@ -41,6 +41,13 @@
 <script defer>
 	$(document).ready(function () {
 		$("input[type='number']").inputSpinner({});
+	})
+
+	$('[data-add-to-cart]').click(function(e){
+		e.preventDefault();
+		$("#ajax-form").attr("action", `/member/cart/add?productId=\${$(this).data('add-to-cart')}&quantity=\${$('[name="quantity"]').val()}`);
+		$("#ajax-form").attr("method", "POST");
+		$("#ajax-form").submit();
 	})
 </script>
 <jsp:include page="/member/footer.jsp"/>

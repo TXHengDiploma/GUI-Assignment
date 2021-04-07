@@ -13,13 +13,15 @@
 						<p class="card-text">RM <%= String.format("%.2f", product.getPrice()) %></p>
 					</div>
 					<div class="card-footer">
-						<a href="/member/products/detail?id=<%= product.getId() %>" target="_blank" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="View Details">
-							<i class="fas fa-eye"></i>
-						</a>
-						<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
-							<i class="fas fa-cart-plus"></i>
-						</button>
-						<button class="btn btn-primary" type="button">Buy Now!</i></button>
+						<div class="btn-group">
+							<a href="/member/products/detail?id=<%= product.getId() %>" target="_blank" class="btn btn-default btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="View Details">
+								<i class="fas fa-eye"></i>
+							</a>
+							<button type="button" data-add-to-cart="/member/cart/add?productId=<%= product.getId() %>" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
+								<i class="fas fa-cart-plus"></i>
+							</button>
+						</div>
+						<%-- <button class="btn btn-primary" type="button">Buy Now!</i></button> --%>
 					</div>
 				</div>
 			</div>

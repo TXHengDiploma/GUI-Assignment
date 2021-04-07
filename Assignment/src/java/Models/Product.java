@@ -91,6 +91,10 @@ public class Product extends DBConnect{
 		this.categoryId = categoryId;
 	}
 
+	public Category getCategory(){
+		return Category.find(categoryId);
+	}
+
 	// brand
 	public int getBrandId() {
 		return brandId;
@@ -100,9 +104,13 @@ public class Product extends DBConnect{
 		this.brandId = brandId;
 	}
 
+	public Brand getBrand(){
+		return Brand.find(brandId);
+	}
+
 	public static void create(Product product) {
 		connectDB();
-		sql = "INSERT INTO products (name, price, image, description, ,isDeleted, brandId, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		sql = "INSERT INTO products (name, price, image, description, isDeleted, brandId, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try {
 			stmt = conn.prepareStatement(sql);
 
