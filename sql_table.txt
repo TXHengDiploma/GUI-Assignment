@@ -67,3 +67,39 @@ CREATE TABLE carts
 	FOREIGN KEY (memberId) REFERENCES members(id),
 	FOREIGN KEY (productId) REFERENCES products(id)
 );
+
+-- Orders Table
+CREATE TABLE orders
+(
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	memberId INTEGER,
+	receiverName VARCHAR(100),
+	email VARCHAR(100),
+	street VARCHAR(100),
+	city VARCHAR(100),
+	postalCode VARCHAR(5),
+	state VARCHAR(30),
+	status VARCHAR(20),
+	totalPrice DOUBLE,
+	shippingFee DOUBLE,
+	createdAt TIMESTAMP,
+	payAt TIMESTAMP,
+	packingAt TIMESTAMP,
+	deliveringAt TIMESTAMP,
+	deliveredAt TIMESTAMP,
+	isPaid BOOLEAN,
+	FOREIGN KEY (memberId) REFERENCES members(id)
+);
+
+-- Order Products Table
+
+CREATE TABLE orderProducts
+(
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	orderId INTEGER,
+	productId INTEGER,
+	productPrice DOUBLE,
+	productQuantity INTEGER,
+	FOREIGN KEY (orderId) REFERENCES orders(id),
+	FOREIGN KEY (productId) REFERENCES products(id)
+);

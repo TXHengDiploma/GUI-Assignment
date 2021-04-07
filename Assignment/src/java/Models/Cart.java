@@ -169,4 +169,21 @@ public class Cart extends DBConnect{
 			}
 		}
 	}
+
+	public static ArrayList<Cart> whereIn(String cartIds){
+		connectDB();
+		ArrayList<Cart> carts = new ArrayList<Cart>();
+		sql = "SELECT * FROM carts C JOIN products P ON C.productId = P.id WHERE C.id IN ("+cartIds+")";
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				carts.add(new Cart(rs.getInt(1), rs.getInt("memberId"), rs.getInt("quantity"), new Product(rs.getInt(5), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("brandId"), rs.getInt("categoryId"))));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return carts;
+	}
 }

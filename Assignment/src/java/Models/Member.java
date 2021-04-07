@@ -253,6 +253,10 @@ public class Member extends DBConnect{
 		return Cart.all(id);
 	}
 
+	public ArrayList<Cart> myCart(String cartIds){
+		return Cart.whereIn(cartIds);
+	}
+
 	public void deleteFromCart(int cartId){
 		Cart.delete(id, cartId);
 	}
