@@ -1,59 +1,34 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="Models.Address"%>
-<% ArrayList<Address> addresses = (ArrayList<address>) request.getAttribute("addresses"); %>
-<table class="address-table display w-100">
-	<thead>
-		<th>Receiver Name</th>
-		<th>Remark Name</th>
-		<th>Email</th>
-		<th>Phone Number</th>
-		<th>Street</th>
-		<th>City</th>
-		<th>State</th>
-		<th>Postal Code</th>
-		<th>Actions</th>
-	</thead>
-	<tbody>
-		<% if(addresses.size() != 0){ %>
-			<% for(Address address : addresses) { %> 
-			<tr>
-				<td><%= address.getReceiverName() %></td>
-				<td><%= address.getRemarkName() %></td>
-				<td><%= address.getEmail() %></td>
-				<td><%= address.getPhoneNumber() %></td>
-				<td><%= address.getStreet() %></td>
-				<td><%= address.getCity() %></td>
-				<td><%= address.getState() %></td>
-				<td><%= address.getPostalCode() %></td>
-				<td>
-					<div class="btn-group">
-							<button class="btn btn-secondary" data-ajax-modal="/member/addresses/edit?id=<%= member.getId() %>"><i class="fa fa-edit"></i></button>
-							<button class="btn btn-danger" data-delete-id="<%= member.getId() %>"><i class="fa fa-trash-alt"></i></button>
-					</div>
-				</td>
-			</tr>
-			<% } %>
+<% ArrayList<Address> addresses = (ArrayList<Address>) request.getAttribute("addresses"); %>
+<div class="row w-100">
+
+	<% if(addresses.size() != 0){ %>
+		<% for(Address address : addresses) { %> 
+		<div class="card col-4">
+			<div class="card-body">
+				<h5 class="card-title"><%= address.getRemarkName() %></h5>
+				<h6 class="card-subtitle mb-2 text-muted"><%= address.getReceiverName() %></h6>
+				<h6 class="card-subtitle mb-2 text-muted"><%= address.getEmail() %> (<%= address.getPhoneNumber() %>)</h6>
+				<p class="card-text"><%= address.getFullAddress() %></p>
+			</div>
+			<div class="card-footer">
+				<div class="btn-group float-right">
+					<button class="btn btn-secondary" data-ajax-modal="/member/addresses/edit?id=<%= address.getId() %>"><i class="fa fa-edit"></i></button>
+					<button class="btn btn-danger" data-delete-id="<%= address.getId() %>"><i class="fa fa-trash-alt"></i></button>
+				</div>
+			</div>
+		</div>
 		<% } %>
-	</tbody>
-</table>
+	<% } else { %>
+		<div class="col-12 text-center"><h3>You have no address!</h3></div>
+	<% } %>
+
+</div>
 <script defer>
-    $(".member-table").DataTable({
-		"columns": [
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "25%", "orderable": false },
-		]
-	});
 
 	$(document).on('click', "[data-delete-id]", function(){
 		let id = $(this).data("delete-id");
-		console.log(id);
 		Swal.fire({
 			title: "Are you sure?",
 			text : "Do you want to delete this address?",
@@ -64,7 +39,7 @@
 		}).then((result)=>{
 			if(result.isConfirmed){
 				console.log(id)
-				$("#ajax-form").attr("action",`/admin/categories/delete?id=\${id}`);
+				$("#ajax-form").attr("action",`/member/addresses/delete?id=\${id}`);
 				$("#ajax-form").attr("method","POST");
 				$("#ajax-form").submit();
 			}

@@ -55,9 +55,4 @@ public class add extends HttpServlet {
                 .add("script", "Swal.fire({title: 'Completed', text: 'New Address Save Successfully', icon: 'success'}).then(()=>{ $('#ajax-modal').modal('toggle'); $('#address-table').ajax_html();})");
         out.print(job.build().toString());
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
 }

@@ -12,8 +12,7 @@ public class Address extends DBConnect{
 		
 	}
 
-	public Address(int id, String receiverName, String remarkName, String email, String phoneNumber, String street, String city, String state, String postalCode){
-		this.id = id;
+	public Address(String receiverName, String remarkName, String email, String phoneNumber, String street, String city, String state, String postalCode){
         this.receiverName = receiverName;
         this.remarkName= remarkName;
         this.email = email;
@@ -116,8 +115,12 @@ public class Address extends DBConnect{
 	public int getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(String memberId) {
-			this. memberId= memberId;
+	public void setMemberId(int memberId) {
+			this. memberId = memberId;
+	}
+
+	public String getFullAddress(){
+		return street + ", " + postalCode + ", " + city + ", " + state + ".";
 	}
 
 	public static void create(Address address) {
