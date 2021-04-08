@@ -66,7 +66,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="member-profile-dropdown">
 							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">My Profile</a>
+							<a class="dropdown-item" href="/member/profile/edit">My Profile</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" data-logout="/member/auth/logout">Logout</a>
 							</div>

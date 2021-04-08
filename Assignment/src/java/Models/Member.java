@@ -4,11 +4,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 
 public class Member extends DBConnect{
     
 	private int id;
-	private String name, email, password, birthday, gender;
+	private String name, email, password, gender;
+	private Date birthday;
 
     public Member(String name, String email, String password){
 		this.name = name;
@@ -23,7 +25,7 @@ public class Member extends DBConnect{
 		this.password = password;
 	}
 
-	public Member(String name, String email, String password, String gender, String birthday){
+	public Member(String name, String email, String password, String gender, Date birthday){
 		this.gender = gender;
 		this.birthday = birthday;
 		this.name = name;
@@ -31,7 +33,7 @@ public class Member extends DBConnect{
 		this.password = password;
 	}
 
-	public Member(int id, String name, String email, String password, String gender, String birthday){
+	public Member(int id, String name, String email, String password, String gender, Date birthday){
 		this.id = id;
 		this.gender = gender;
 		this.birthday = birthday;
@@ -81,10 +83,10 @@ public class Member extends DBConnect{
 	}
 
 	//Birthday
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
@@ -144,7 +146,7 @@ public class Member extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				member = new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("birthday"));
+				member = new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getDate("birthday"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -164,7 +166,7 @@ public class Member extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				member = new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("birthday"));
+				member = new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getDate("birthday"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -189,22 +191,6 @@ public class Member extends DBConnect{
 		return members;
 	}
 
-	// public static ArrayList<Product> allWithDeleted(){
-	// 	connectDB();
-	// 	ArrayList<Product> products = new ArrayList<Product>();
-	// 	sql = "SELECT * FROM products ORDER BY id DESC";
-	// 	try {
-	// 		stmt = conn.prepareStatement(sql);
-
-	// 		rs = stmt.executeQuery();
-	// 		while(rs.next()){
-	// 			products.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("description")));
-	// 		}
-	// 	} catch (SQLException e) {
-	// 		System.out.println(e.getMessage());
-	// 	}
-	// 	return products;
-	// }
 
 	public static int count(){
 		connectDB();
@@ -234,11 +220,45 @@ public class Member extends DBConnect{
 
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				members.add(new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("birthday")));
+				members.add(new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getDate("birthday")));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return members;
+	}
+
+	public void updatepassword() {
+		connectDB();
+		sql = "UPDATE members SET password=? WHERE id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, hashPassword(password));
+
+			stmt.setInt(2, id);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void update() {
+		connectDB();
+		sql = "UPDATE members SET name=?, gender=?, birthday=? WHERE id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, name);
+			stmt.setString(2, gender);
+			stmt.setDate(3, birthday);
+
+			stmt.setInt(4, id);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

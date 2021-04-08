@@ -54,5 +54,7 @@ CREATE TABLE members
 	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1000, INCREMENT BY 1),   
 	name VARCHAR(60),
 	email VARCHAR(100),
-	password VARCHAR(100)
+	password VARCHAR(100),
+	gender VARCHAR(8),
+	birthday DATE
 );
