@@ -20,9 +20,4 @@ public class ajax_table extends HttpServlet {
         request.setAttribute("categories", Category.all());
         request.getRequestDispatcher("/admin/categories/ajax_table.jsp").forward(request, response);
     }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
 }
