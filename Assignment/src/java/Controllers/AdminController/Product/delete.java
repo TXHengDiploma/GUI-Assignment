@@ -29,10 +29,5 @@ public class delete extends HttpServlet {
         JsonObjectBuilder job = Json.createObjectBuilder()
                 .add("script", "Swal.fire({title: 'Completed', text: 'Product Delete Successfully', icon: 'success'}).then(()=>{$('#product-table').ajax_html();})");
         out.print(job.build().toString());
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
+    }  
 }

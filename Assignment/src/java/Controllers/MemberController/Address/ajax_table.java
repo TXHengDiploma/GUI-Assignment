@@ -32,9 +32,4 @@ public class ajax_table extends HttpServlet {
         request.setAttribute("addresses", member.getAddresses());
         request.getRequestDispatcher("/member/addresses/ajax_table.jsp").forward(request, response);
     }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
 }

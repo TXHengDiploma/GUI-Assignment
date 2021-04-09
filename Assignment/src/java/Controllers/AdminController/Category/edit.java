@@ -45,10 +45,5 @@ public class edit extends HttpServlet {
         JsonObjectBuilder job = Json.createObjectBuilder()
                 .add("script", "Swal.fire({title: 'Completed', text: 'Category Update Successfully', icon: 'success'}).then(()=>{ $('#ajax-modal').modal('toggle'); $('#category-table').ajax_html();})");
         out.print(job.build().toString());
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
+    } 
 }
