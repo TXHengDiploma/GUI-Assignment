@@ -3,17 +3,25 @@ package Models;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Admin extends DBConnect{
     
 	private int id;
 	private String name, role, email, password;
+	private boolean isDeleted;
+
+	public Admin(){
+		isDeleted = false;
+	}
 
     public Admin(String name, String role, String email, String password){
 		this.name = name;
 		this.role = role;
 		this.email = email;
 		this.password = password;
+		this.isDeleted = false;
+
 	}
 
 	public Admin(int id, String name, String role, String email, String password){
@@ -22,6 +30,7 @@ public class Admin extends DBConnect{
 		this.role = role;
 		this.email = email;
 		this.password = password;
+		this.isDeleted = false;
 	}
 
     //Id
@@ -65,6 +74,15 @@ public class Admin extends DBConnect{
         this.password = password;
     }
 
+	// Delete Admin
+	public boolean getIsDeleted(){
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	// Verify Admin
 	public boolean auth(){
 		Admin searchMember = find(id);
@@ -95,7 +113,7 @@ public class Admin extends DBConnect{
     //Create Admin
 	public static void create(Admin admin) {
 		connectDB();
-		sql = "INSERT INTO admins (name, role, email, password) VALUES (?, ?, ?, ?)";
+		sql = "INSERT INTO admins (name, role, email, password, isDeleted) VALUES (?, ?, ?, ?, ?)";
 		try {
 			stmt = conn.prepareStatement(sql);
 
@@ -103,6 +121,7 @@ public class Admin extends DBConnect{
 			stmt.setString(2, admin.getRole());
 			stmt.setString(3, admin.getEmail());
 			stmt.setString(4, hashPassword(admin.getPassword()));
+			stmt.setBoolean(5, false);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -110,16 +129,18 @@ public class Admin extends DBConnect{
 		}
 	}
 
+
 	public void update() {
 		connectDB();
-		sql = "UPDATE admins SET name=?, role=?, email=?, password=?";
+		sql = "UPDATE admins SET name=?, role=?, email=?, password=? WHERE id=?";
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, name);
 			stmt.setString(2, role);
 			stmt.setString(3, email);
-			stmt.setString(4, password);
+			stmt.setString(4, hashPassword(password));
+			stmt.setInt(5, id);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -182,6 +203,78 @@ public class Admin extends DBConnect{
 		}
 		return admin;
 	}
+
+	public static ArrayList<Admin> allStaffs() {
+		connectDB();
+		ArrayList<Admin> admins = new ArrayList<Admin>();
+		sql = "SELECT * FROM admins WHERE isDeleted=? AND  role='staff' ORDER BY id DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setBoolean(1, false);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("email")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return admins;
+	}
+
+	public static ArrayList<Admin> allAdmins() {
+		connectDB();
+		ArrayList<Admin> admins = new ArrayList<Admin>();
+		sql = "SELECT * FROM admins WHERE isDeleted=? AND  role='admin' ORDER BY id DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setBoolean(1, false);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("email")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return admins;
+	}
+
+	//All Staffs with deleted need to change(allStaffs)
+	//public static ArrayList<Admin> allStaffs() {
+	//	connectDB();
+	//	ArrayList<Admin> admins = new ArrayList<Admin>();
+	//	sql = "SELECT * FROM admins WHERE role='staff' ORDER BY id DESC";
+	//	try {
+	//		stmt = conn.prepareStatement(sql);
+//
+//			rs = stmt.executeQuery();
+//			while(rs.next()){
+//				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email")rs.getString("email")));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return admins;
+//	}
+
+	//All Admins with deleted need to change(allAdmins)
+	//public static ArrayList<Admin> allAdmins() {
+	//	connectDB();
+	//	ArrayList<Admin> admins = new ArrayList<Admin>();
+	//	sql = "SELECT * FROM admins WHERE role='admin' ORDER BY id DESC";
+	//	try {
+	//		stmt = conn.prepareStatement(sql);
+//
+//			rs = stmt.executeQuery();
+//			while(rs.next()){
+//				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("password")));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return admins;
+//	}
 	
 
 	// public void update() {
