@@ -1,4 +1,4 @@
-package Controllers.AdminController.Auth;
+package Controllers.AdminController.Admin;
 
 import javax.json.*;
 import java.io.IOException;
@@ -8,25 +8,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import Models.Admin;
 
-@WebServlet(name = "AdminAdd", urlPatterns = {"/admin/auth/signup"})
-public class signup extends HttpServlet {
+@WebServlet(name = "AdminAdminEdit", urlPatterns = {"/admin/admins/edit"})
+public class edit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/admin/auth/signup.jsp").forward(request, response);
+		
+		Admin admin = Admin.find(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("admin", admin);
+        request.getRequestDispatcher("/admin/admins/edit_admin.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        
-        if(!request.getParameter("admin_password").equals(request.getParameter("admin_confirmpass")))
+
+		String name = request.getParameter("admin_name");
+        String role = request.getParameter("admin_role");
+		String email = request.getParameter("admin_email");
+		String password = request.getParameter("admin_pass");
+        String confirmpass = request.getParameter("admin_confirmpass");
+
+		Admin admin = Admin.find(Integer.parseInt(request.getParameter("id")));
+		PrintWriter out = response.getWriter();
+
+		admin.setName(name);
+		admin.setRole(role);
+
+        if(!request.getParameter("admin_pass").equals(request.getParameter("admin_confirmpass")))
         {
             request.setCharacterEncoding("utf-8");
             response.setContentType("application/json");
@@ -37,25 +50,19 @@ public class signup extends HttpServlet {
             return;
         }
 
-        if(Admin.findByEmail(request.getParameter("admin_email")) != null){
-            response.setCharacterEncoding("utf-8");
-			response.setContentType("application/json");
-			response.setStatus(HttpServletResponse.SC_OK);
-			JsonObjectBuilder job = Json.createObjectBuilder()
-			    .add("script", "Swal.fire({title: 'Opps...', text: 'This e-mail has been used by other user, please try another', icon: 'error'})");
-			out.print(job.build().toString());
-			return;
-        }
-
-        Admin admin = new Admin(request.getParameter("admin_name"), request.getParameter("role"),request.getParameter("admin_email"), request.getParameter("admin_password"));
-
-        Admin.create(admin);
+        
+        admin.update();
 
         request.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         JsonObjectBuilder job = Json.createObjectBuilder()
-            .add("script", "Swal.fire({title: 'Completed', text: 'Create Successfully', icon: 'success'})");
+                .add("script", "Swal.fire({title: 'Completed', text: 'Admin Update Successfully', icon: 'success'}).then(()=>{ $('#ajax-modal').modal('toggle'); $('#admin-table').ajax_html();})");
         out.print(job.build().toString());
     }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }   
 }

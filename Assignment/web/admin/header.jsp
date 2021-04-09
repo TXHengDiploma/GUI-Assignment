@@ -89,27 +89,22 @@
 				</a>
 			</li>
 
-				<li class="nav-item <%= urlSegments[1].equals("auth") ? "active" : ""%>">
-					<a class="nav-link collapsed" href="/admin/auth/signup">
-						<i class="fas fa-user-plus"></i>
-						<span>Add New Admin</span>
-					</a>
-				</li>
-
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+			<% if(admin.getRole().equals("admin")){ %>
+			<li class="nav-item <%= urlSegments[1].equals("staffs") || urlSegments[1].equals("admins") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
 					aria-expanded="true" aria-controls="collapseTwo">
 					<i class="fas fa-fw fa-cog"></i>
-					<span>Components</span>
+					<span>Maintain Staff</span>
 				</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				<div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Components:</h6>
-						<a class="collapse-item" href="buttons.html">Buttons</a>
-						<a class="collapse-item" href="cards.html">Cards</a>
+						<h6 class="collapse-header">Role:</h6>
+						<a class="collapse-item" href="/admin/admins/list.jsp">Admins</a>
+						<a class="collapse-item" href="/admin/staffs/list.jsp">Staffs</a>
 					</div>
 				</div>
 			</li>
+			<% } %>
 
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">
