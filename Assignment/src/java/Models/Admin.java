@@ -7,17 +7,19 @@ import java.sql.SQLException;
 public class Admin extends DBConnect{
     
 	private int id;
-	private String name, email, password;
+	private String name, role, email, password;
 
-    public Admin(String name, String email, String password){
+    public Admin(String name, String role, String email, String password){
 		this.name = name;
+		this.role = role;
 		this.email = email;
 		this.password = password;
 	}
 
-	public Admin(int id, String name, String email, String password){
+	public Admin(int id, String name, String role, String email, String password){
         this.id = id;
 		this.name = name;
+		this.role = role;
 		this.email = email;
 		this.password = password;
 	}
@@ -38,6 +40,15 @@ public class Admin extends DBConnect{
 		this.name = name;
     }
     
+	//Role
+	public String getRole(){
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
     //Email
     public String getEmail() {
         return email;
@@ -84,13 +95,47 @@ public class Admin extends DBConnect{
     //Create Admin
 	public static void create(Admin admin) {
 		connectDB();
-		sql = "INSERT INTO admins (name, email, password) VALUES (?, ?, ?)";
+		sql = "INSERT INTO admins (name, role, email, password) VALUES (?, ?, ?, ?)";
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, admin.getName());
-			stmt.setString(2, admin.getEmail());
-			stmt.setString(3, hashPassword(admin.getPassword()));
+			stmt.setString(2, admin.getRole());
+			stmt.setString(3, admin.getEmail());
+			stmt.setString(4, hashPassword(admin.getPassword()));
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void update() {
+		connectDB();
+		sql = "UPDATE admins SET name=?, role=?, email=?, password=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, name);
+			stmt.setString(2, role);
+			stmt.setString(3, email);
+			stmt.setString(4, password);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void delete() {
+		connectDB();
+		sql = "UPDATE admins SET isDeleted=? WHERE id=?";
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setBoolean(1, true);
+			stmt.setInt(2, id);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -110,7 +155,7 @@ public class Admin extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
+				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -130,7 +175,7 @@ public class Admin extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
+				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
