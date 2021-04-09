@@ -25,7 +25,7 @@
 					<%= cart.getProduct().getName() %>
 				</td>
 				<td><input data-number="<%= cart.getId() %>" data-price="<%= cart.getProduct().getPrice() %>" class="pl-5 pr-5" type="number" value="<%= cart.getQuantity() %>" min="1" max="100" step="1"/></td>
-				<td>RM <span data-price-id="<%= cart.getId() %>"><%= String.format("%.2f",cart.getProduct().getPrice() * cart.getQuantity()) %><span></td>
+				<td>RM <span data-price-id="<%= cart.getId() %>"><%= String.format("%.2f",cart.getProduct().getPrice() * cart.getQuantity()) %></span></td>
 				<td>
 					<div class="btn-group">
 						<button class="btn btn-danger" data-delete-id="<%= cart.getId() %>"><i class="fa fa-trash-alt"></i></button>

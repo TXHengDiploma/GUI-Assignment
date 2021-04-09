@@ -298,4 +298,12 @@ public class Member extends DBConnect{
 		cart.setQuantity(quantity);
 		cart.update();
 	}
+
+	public void newOrder(String cartIds, Order order){
+		order.createProducts(myCart(cartIds));
+	}
+
+	public ArrayList<Order> getOrders(){
+		return Order.all(id);
+	}
 }
