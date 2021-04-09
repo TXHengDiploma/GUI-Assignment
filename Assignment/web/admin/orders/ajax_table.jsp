@@ -7,6 +7,7 @@
 </style>
 <table class="order-table display w-100">
 	<thead>
+		<th>Member</th>
 		<th>Order Id</th>
 		<th>Status</th>
 		<th>Amount To Pay</th>
@@ -15,12 +16,13 @@
 		<% if(orders.size() != 0){ %>
 			<% for(Order order : orders) { %> 
 			<tr>
+				<td><a href="/admin/members/details?id=<%= order.getMemberId() %>">LMM<%= order.getMemberId() %></a></td>
 				<td>
-					<a href="/member/orders/details?id=<%= order.getId() %>">LMO<%= String.format("%05d", order.getId()) %></a>
+					<button class="btn btn-primary" data-ajax-modal="/admin/orders/details?id=<%= order.getId() %>">LMO<%= String.format("%05d", order.getId()) %></button>
 				</td>
 				<td>
 					<% if(order.getStatus().equals("pending")) { %>
-						<label class="badge badge-warning" data-toggle="tooltip" title="Click to make payment"><a href="member/orders/payment?id=<%= order.getId() %>">Payment Pending</a></label>
+						<label class="badge badge-warning">Payment Pending</label>
 					<% } else if (order.getStatus().equals("paid")) { %>
 						<label class="badge badge-success">Paid</label>
 					<% } else if (order.getStatus().equals("packing")) { %>
@@ -35,7 +37,7 @@
 			</tr>
 			<% } %>
 		<% } else { %>
-			<h5 class="w-100 text-center">You have no order!</h5>
+			<h5 class="w-100 text-center">No Record!</h5>
 		<% } %>
 	</tbody>
 </table>
@@ -44,9 +46,10 @@
 <script defer>
     $(".order-table").DataTable({
 		"columns": [
-			{ "width": "30%" },
-			{ "width": "30%" },
-			{ "width": "30%" },
+			{ "width": "25%" },
+			{ "width": "25%" },
+			{ "width": "25%" },
+			{ "width": "25%" },
 		]
 	});
 	function linkTrack(num) {

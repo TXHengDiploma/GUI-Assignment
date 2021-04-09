@@ -1,6 +1,5 @@
 package Models;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -149,7 +148,7 @@ public class Order extends DBConnect {
 		connectDB();
 		ArrayList<Order> orders = new ArrayList<Order>();
 
-		sql = "SELECT * FROM orders";
+		sql = "SELECT * FROM orders ORDER BY createdAt DESC";
 		try {
 			stmt = conn.prepareStatement(sql);
 
@@ -181,6 +180,24 @@ public class Order extends DBConnect {
 		}
 
 		return orders;
+	}
+
+	public static Order find(int orderId){
+		connectDB();
+		Order order = null;
+		sql = "SELECT * FROM orders WHERE id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, orderId);
+
+			rs = stmt.executeQuery();
+			if(rs.next())
+				order = new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("payAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid"));
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return order;
 	}
 
 	public static Order create(Order order){
@@ -248,5 +265,9 @@ public class Order extends DBConnect {
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+
+	public ArrayList<OrderProduct> getOrderProducts(){
+		return OrderProduct.whereOrderId(id);
 	}
 }

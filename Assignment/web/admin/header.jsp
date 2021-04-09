@@ -82,6 +82,13 @@
 				</a>
 			</li>
 			
+			<li class="nav-item <%= urlSegments[1].equals("orders") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/orders/list.jsp">
+					<i class="fas fa-truck"></i>
+					<span>Orders</span>
+				</a>
+			</li>
+
 				<li class="nav-item <%= urlSegments[1].equals("auth") ? "active" : ""%>">
 					<a class="nav-link collapsed" href="/admin/auth/signup">
 						<i class="fas fa-user-plus"></i>
