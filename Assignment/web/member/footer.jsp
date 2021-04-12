@@ -122,9 +122,9 @@
 							<p>
 								<strong><u>Contacts</u></strong>
 								<br>
-								<br><strong>E-mail to: </strong><a href="mailto:dftlovemusic3000@gmail.com" class="text-primary">dftlovemusic3000@gmail.com</a>
-								<br>Ms.Kau - <a href="tel:+60187882763" class="text-primary">018-7882763</a>
-								<br>Mr.Tan - <a href="tel:+60103661030" class="text-primary">010-3661030</a>
+								<br><strong>E-mail to: </strong><a href="mailto:dftlovemusic3000@gmail.com" class="text-warning">dftlovemusic3000@gmail.com</a>
+								<br>Ms.Kau - <a href="tel:+60187882763" class="text-warning">018-7882763</a>
+								<br>Mr.Tan - <a href="tel:+60103661030" class="text-warning">010-3661030</a>
 							</p>
 
 								<div class="footer-social-icons">
