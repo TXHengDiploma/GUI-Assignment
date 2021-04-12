@@ -40,7 +40,6 @@ public class ajax_list extends HttpServlet {
         }
 
         if(query.length() != 0){
-            System.out.println(query);
             brands = Brand.filter(query);
         } else {
             brands = Brand.all();

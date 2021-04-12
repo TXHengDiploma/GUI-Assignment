@@ -40,7 +40,6 @@ public class ajax_list extends HttpServlet {
         }
 
         if(query.length() != 0){
-            System.out.println(query);
             products = Product.filter(query);
         } else {
             products = Product.all();

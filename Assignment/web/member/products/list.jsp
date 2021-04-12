@@ -1,5 +1,5 @@
 <jsp:include page="/member/header.jsp">
-	<jsp:param name="pageTitle" value="Product Page"/>
+	<jsp:param name="pageTitle" value="Product"/>
 </jsp:include>
 <%@page import="Models.Brand"%>
 <%@page import="Models.Category"%>

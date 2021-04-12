@@ -131,17 +131,6 @@
 				</div>
 			</div>
 		</div>
-		<% if(!order.getStatus().equals("pending") || !order.getStatus().equals("delivered")){ %>
-			<div class="modal-footer">
-				<% if(order.getStatus().equals("paid")){ %>
-					<button type="submit" class="btn btn-primary" data-update-status="packing">Update Status To Packing</button>
-				<% } else if (order.getStatus().equals("packing")) { %>
-					<button type="submit" class="btn btn-primary" data-update-status="delivering">Update Status To Delivering</button>
-				<% } else if (order.getStatus().equals("delivering")) { %>
-					<button type="submit" class="btn btn-primary" data-update-status="delivered">Update Status To Delivered</button>
-				<% } %>
-			</div>
-		<% } %>
 	</div>
 </div>
 <script defer>
@@ -154,11 +143,4 @@ $('.order-product-table').DataTable({
 		{ "width": "25%" }
 	]
 });
-$('[data-update-status]').click(function(e){
-	e.preventDefault();
-	let status = $(this).data('update-status');
-	$('#ajax-form').attr('action',`/admin/orders/details?id=<%= order.getId() %>&status=\${status}`);
-	$('#ajax-form').attr('method','POST');
-	$('#ajax-form').submit();
-})
 </script>

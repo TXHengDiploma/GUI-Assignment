@@ -16,11 +16,11 @@
 			<% for(Order order : orders) { %> 
 			<tr>
 				<td>
-					<a href="/member/orders/details?id=<%= order.getId() %>">LMO<%= String.format("%05d", order.getId()) %></a>
+					<p class="text-primary" data-ajax-modal="/member/orders/details?id=<%= order.getId() %>">LMO<%= String.format("%05d", order.getId()) %></p>
 				</td>
 				<td>
 					<% if(order.getStatus().equals("pending")) { %>
-						<label class="badge badge-warning" data-toggle="tooltip" title="Click to make payment"><a href="member/orders/payment?id=<%= order.getId() %>">Payment Pending</a></label>
+						<label class="badge badge-danger" data-toggle="tooltip" title="Click to make payment"><a class="text-light" href="/member/orders/payment?id=<%= order.getId() %>">Payment Pending</a></label>
 					<% } else if (order.getStatus().equals("paid")) { %>
 						<label class="badge badge-success">Paid</label>
 					<% } else if (order.getStatus().equals("packing")) { %>

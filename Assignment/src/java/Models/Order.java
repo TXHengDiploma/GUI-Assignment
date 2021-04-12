@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import Controllers.MemberController.Orders.create;
+
 public class Order extends DBConnect {
 
 	private int id, memberId;
@@ -154,7 +156,7 @@ public class Order extends DBConnect {
 
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				orders.add(new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("payAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid")));
+				orders.add(new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("packingAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid")));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -173,7 +175,7 @@ public class Order extends DBConnect {
 			stmt.setInt(1, memberId);
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				orders.add(new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("payAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid")));
+				orders.add(new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("packingAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid")));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -192,7 +194,7 @@ public class Order extends DBConnect {
 
 			rs = stmt.executeQuery();
 			if(rs.next())
-				order = new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("payAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid"));
+				order = new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("packingAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid"));
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -228,16 +230,13 @@ public class Order extends DBConnect {
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			if(rs.next()){
-				System.out.println(rs.getInt(1)+"");
 				order.setId(rs.getInt(1));
-				System.out.println(order.getId()+"");
 			} else {
 				System.out.println("Cannot access generated keys");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(order.getId()+" before return");
 		return order;
 	}
 
@@ -269,5 +268,26 @@ public class Order extends DBConnect {
 
 	public ArrayList<OrderProduct> getOrderProducts(){
 		return OrderProduct.whereOrderId(id);
+	}
+
+	public void update(){
+		connectDB();
+		sql = "UPDATE orders SET status=?, payAt=?, packingAt=?, deliveringAt=?, deliveredAt=?, isPaid=? WHERE id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, status);
+			stmt.setTimestamp(2, payAt);
+			stmt.setTimestamp(3, packingAt);
+			stmt.setTimestamp(4, deliveringAt);
+			stmt.setTimestamp(5, deliveredAt);
+			stmt.setBoolean(6, isPaid);
+			stmt.setInt(7, id);
+
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

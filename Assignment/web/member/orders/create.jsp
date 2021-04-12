@@ -73,8 +73,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<button type="button" class="btn btn-secondary btn-lg btn-block" data-carts="<%= request.getParameter("carts") %>" data-pay-now="false">Confirm Order, Make Pay In A Minutes</button>
-		<button type="button" class="btn btn-primary btn-lg btn-block" data-carts="<%= request.getParameter("carts") %>" data-pay-now="true">Proceed To Payment</button>
+		<button type="button" class="btn btn-secondary btn-lg btn-block" data-carts="<%= request.getParameter("carts") %>">Confirm Order</button>
 	</div>
 </div>
 <script defer>
@@ -89,7 +88,7 @@ $("[data-pay-now]").click(function (e) {
 		});
 		return;
 	}
-	$("#ajax-form").attr("action",`/member/orders/new?addressId=\${radioBtn.val()}&carts=\${carts}&payNow=\${paynow}`);
+	$("#ajax-form").attr("action",`/member/orders/new?addressId=\${radioBtn.val()}&carts=\${carts}`);
 	$("#ajax-form").attr("method","POST");
 	$("#ajax-form").submit();
 

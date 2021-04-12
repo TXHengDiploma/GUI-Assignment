@@ -54,7 +54,6 @@ public class create extends HttpServlet {
 		}
 		Order order = new Order(member.getId(), Address.find(Integer.parseInt(request.getParameter("addressId"))), "pending", totalPrice, totalItem * 5, new Timestamp(System.currentTimeMillis()), null, null, null, null, false );
 		order = Order.create(order);
-		System.out.println(order.getId()+" In do post");
         member.newOrder(request.getParameter("carts"), order);
 
 		PrintWriter out = response.getWriter();
