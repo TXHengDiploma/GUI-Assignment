@@ -1,7 +1,7 @@
 package Controllers.AdminController.Order;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +16,13 @@ public class ajax_table extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("orders", Order.all());
+        ArrayList<Order> orders;
+        if(request.getParameter("month") != null && request.getParameter("year") != null){
+            orders = Order.byMonth(Integer.parseInt(String.valueOf(request.getParameter("month"))), Integer.parseInt(String.valueOf(request.getParameter("year"))));
+        } else {
+            orders = Order.all();
+        }
+        request.setAttribute("orders", orders);
         request.getRequestDispatcher("/admin/orders/ajax_table.jsp").forward(request, response);
     }
 }

@@ -288,4 +288,44 @@ public class Order extends DBConnect {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	public static double[] salesReport(int month, int year, int size){
+		connectDB();
+		sql = "SELECT DAY(createdAt), SUM(totalPrice) FROM NBUSER.ORDERS WHERE Month(createdAt)=? AND YEAR(createdAt)=? GROUP BY DAY(createdAt)";
+		double[] results = new double[size];
+		try{
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, month);
+			stmt.setInt(2, year);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				results[rs.getInt(1)] = rs.getDouble(2);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return results;
+	}
+
+	public static ArrayList<Order> byMonth(int month, int year){
+		connectDB();
+		ArrayList<Order> orders = new ArrayList<Order>();
+
+		sql = "SELECT * FROM orders WHERE MONTH(createdAt)=? AND YEAR(createdAt)=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, month);
+			stmt.setInt(2, year);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				orders.add(new Order(rs.getInt("id"), rs.getInt("memberId"), new Address(rs.getString("receiverName"), rs.getString("remarkName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("postalCode")), rs.getString("status"), rs.getDouble("totalPrice"), rs.getDouble("shippingFee"), rs.getTimestamp("createdAt"), rs.getTimestamp("payAt"), rs.getTimestamp("packingAt"), rs.getTimestamp("deliveringAt"), rs.getTimestamp("deliveredAt"), rs.getBoolean("isPaid")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return orders;
+	}
 }

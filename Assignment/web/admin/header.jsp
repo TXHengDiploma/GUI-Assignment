@@ -10,7 +10,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>${param.pageTitle} - Coy Name</title>
+	<title>${param.pageTitle} - Love Music</title>
 	
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
@@ -89,6 +89,14 @@
 				</a>
 			</li>
 
+
+			<li class="nav-item <%= urlSegments[1].equals("reports") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/reports/monthly_sales_report.jsp">
+					<i class="fas fa-chart-line"></i>
+					<span>Reports</span>
+				</a>
+			</li>
+
 			<% if(admin.getRole().equals("admin")){ %>
 			<li class="nav-item <%= urlSegments[1].equals("staffs") || urlSegments[1].equals("admins") ? "active" : ""%>">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
@@ -132,66 +140,6 @@
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-						<!-- Nav Item - Alerts -->
-						<li class="nav-item dropdown no-arrow mx-1">
-							<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-bell fa-fw"></i>
-								<!-- Counter - Alerts -->
-								<!-- <span class="badge badge-danger badge-counter">3+</span> -->
-							</a>
-							<!-- Dropdown - Alerts -->
-							<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								aria-labelledby="alertsDropdown">
-								<h6 class="dropdown-header">
-									Notifications
-								</h6>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-primary">
-											<i class="fas fa-file-alt text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 12, 2019</div>
-										<span class="font-weight-bold">A new monthly report is ready to download!</span>
-									</div>
-								</a>
-								<a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
-							</div>
-						</li>
-
-						<!-- Nav Item - Messages -->
-						<li class="nav-item dropdown no-arrow mx-1">
-							<a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-envelope fa-fw"></i>
-								<!-- Counter - Messages -->
-								<!-- <span class="badge badge-danger badge-counter">7</span> -->
-							</a>
-							<!-- Dropdown - Messages -->
-							<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								aria-labelledby="messagesDropdown">
-								<h6 class="dropdown-header">
-									Messages
-								</h6>
-								<!-- <a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="dropdown-list-image mr-3">
-										<img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
-										<div class="status-indicator bg-success"></div>
-									</div>
-									<div class="font-weight-bold">
-										<div class="text-truncate">Hi there! I am wondering if you can help me with a
-											problem I've been having.</div>
-										<div class="small text-gray-500">Emily Fowler · 58m</div>
-									</div>
-								</a> -->
-								<a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-							</div>
-						</li>
-
-						<div class="topbar-divider d-none d-sm-block"></div>
-
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -213,7 +161,6 @@
 								</a>
 							</div>
 						</li>
-
 					</ul>
 
 				</nav>
