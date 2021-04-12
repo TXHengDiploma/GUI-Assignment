@@ -68,7 +68,7 @@
 		<div class="col-sm-4">
 			<div class="form-group">
 				<label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV</label>
-				<input class="form-control" required="" type="text" placeholder="420">
+				<input class="form-control" required="" type="text" placeholder="420" maxlength="3" minlength="3">
 			</div> <!-- form-group.// -->
 		</div>
 	</div> <!-- row.// -->

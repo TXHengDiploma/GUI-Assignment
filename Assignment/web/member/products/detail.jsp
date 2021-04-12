@@ -6,7 +6,7 @@
 	Category category = product.getCategory();
 %>
 <jsp:include page="/member/header.jsp">
-	<jsp:param name="pageTitle" value="Product Detail Page"/>
+	<jsp:param name="pageTitle" value="${product.name}"/>
 </jsp:include>
 
 <!-- Page Features -->
@@ -45,8 +45,8 @@
 
 	$('[data-add-to-cart]').click(function(e){
 		e.preventDefault();
-		$("#ajax-form").attr("action", `/member/cart/add?productId=\${$(this).data('add-to-cart')}&quantity=\${$('[name="quantity"]').val()}`);
-		$("#ajax-form").attr("method", "POST");
+		$("#ajax-form").attr('action', `/member/cart/add?productId=\${$(this).data('add-to-cart')}&quantity=\${$('[name="quantity"]').val()}`);
+		$("#ajax-form").attr('method', 'POST');
 		$("#ajax-form").submit();
 	})
 </script>

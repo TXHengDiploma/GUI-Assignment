@@ -17,7 +17,6 @@ CREATE TABLE brands
 	name VARCHAR(100),
 	image LONG VARCHAR,
 	description VARCHAR(255),
-	description LONG VARCHAR,
 	isDeleted BOOLEAN NOT NULL DEFAULT false
 );
 
@@ -45,10 +44,11 @@ CREATE TABLE admins
 	name VARCHAR(60),
 	role VARCHAR(20),
 	email VARCHAR(100),
-	password VARCHAR(100)
+	password VARCHAR(100),
 	isDeleted BOOLEAN NOT NULL DEFAULT false
 );
 
+INSERT INTO admins (name, role, email, password) VALUES ( 'Admin', 'admin', 'admin@lovemusic.com', 'bc63837321258858695a6c1f2b74eb35' );
 -- Member Table
 
 CREATE TABLE members

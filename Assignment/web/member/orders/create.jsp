@@ -73,13 +73,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<button type="button" class="btn btn-secondary btn-lg btn-block" data-carts="<%= request.getParameter("carts") %>">Confirm Order</button>
+		<button type="button" class="btn btn-secondary btn-lg btn-block" data-carts="<%= request.getParameter("carts") %>" data-pay-now>Confirm Order</button>
 	</div>
 </div>
 <script defer>
 $("[data-pay-now]").click(function (e) {
 	e.preventDefault();
-	let carts = $(this).data('carts'), paynow = $(this).data('pay-now'), radioBtn = $('input[name="addressId"]:checked');
+	let carts = $(this).data('carts'), radioBtn = $('input[name="addressId"]:checked');
 	if(radioBtn.length != 1){
 		Swal.fire({
 			title:"Oops...",

@@ -4,8 +4,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import Controllers.MemberController.Orders.create;
-
 public class Order extends DBConnect {
 
 	private int id, memberId;

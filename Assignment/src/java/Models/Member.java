@@ -261,4 +261,47 @@ public class Member extends DBConnect{
 			System.out.println(e.getMessage());
 		}
 	}
+
+	public void addAddress(Address address) {
+		address.setMemberId(id);
+		Address.create(address);
+	}
+
+	public void deleteAddress(int addressId) {
+		Address.find(addressId).delete();
+	}
+
+	public ArrayList<Address> getAddresses() {
+		return Address.findByMemberId(id);
+	}
+
+	public void addToCart(int productId, int quantity){
+		Cart.create(id,productId,quantity);
+	}
+
+	public ArrayList<Cart> myCart(){
+		return Cart.all(id);
+	}
+
+	public ArrayList<Cart> myCart(String cartIds){
+		return Cart.whereIn(cartIds);
+	}
+
+	public void deleteFromCart(int cartId){
+		Cart.delete(id, cartId);
+	}
+
+	public void updateCart(int cartId, int quantity){
+		Cart cart = Cart.findByCartId(id, cartId);
+		cart.setQuantity(quantity);
+		cart.update();
+	}
+
+	public void newOrder(String cartIds, Order order){
+		order.createProducts(myCart(cartIds));
+	}
+
+	public ArrayList<Order> getOrders(){
+		return Order.all(id);
+	}
 }
