@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Member extends DBConnect{
     
 	private int id;
-	private String name, email, password;
+	private String name, email, password, birthday, gender;
 
     public Member(String name, String email, String password){
 		this.name = name;
@@ -22,7 +22,13 @@ public class Member extends DBConnect{
 		this.email = email;
 		this.password = password;
 	}
-
+	public Member(String name, String email, String password, String gender, String birthday){
+        this.gender = gender;
+        this.birthday = birthday;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
     //Id
     public int getId() {
 		return id;
@@ -53,6 +59,21 @@ public class Member extends DBConnect{
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+	//Gender
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    //Birthday
+    public String getBirthday() {
+        return birthday;
+    }
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
 	// Verify Member
@@ -139,7 +160,14 @@ public class Member extends DBConnect{
 		return member;
 	}
 	
+	public void addAddress(Address address) {
+		address.setMemberId(id);
+		Address.create(address);
+	}
 
+	public void deleteAddress(int addressId) {
+		Address.find(addressId).delete();
+	}
 	// public void update() {
 	// 	connectDB();
 	// 	sql = "UPDATE members SET name=?, email=?, password=? WHERE id=?";
@@ -189,6 +217,10 @@ public class Member extends DBConnect{
 			System.out.println(e.getMessage());
 		}
 		return members;
+	}
+
+	public ArrayList<Address> getAddresses() {
+		return Address.findByMemberId(id);
 	}
 
 	// public static ArrayList<Product> allWithDeleted(){
@@ -253,6 +285,10 @@ public class Member extends DBConnect{
 		return Cart.all(id);
 	}
 
+	public ArrayList<Cart> myCart(String cartIds){
+		return Cart.whereIn(cartIds);
+	}
+
 	public void deleteFromCart(int cartId){
 		Cart.delete(id, cartId);
 	}
@@ -261,5 +297,13 @@ public class Member extends DBConnect{
 		Cart cart = Cart.findByCartId(id, cartId);
 		cart.setQuantity(quantity);
 		cart.update();
+	}
+
+	public void newOrder(String cartIds, Order order){
+		order.createProducts(myCart(cartIds));
+	}
+
+	public ArrayList<Order> getOrders(){
+		return Order.all(id);
 	}
 }

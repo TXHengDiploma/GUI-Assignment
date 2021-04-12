@@ -19,15 +19,4 @@ public class detail extends HttpServlet {
         request.setAttribute("product", Product.find(Integer.parseInt(request.getParameter("id"))));
         request.getRequestDispatcher("/member/products/detail.jsp").forward(request, response);
     }
-    
-	@Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
 }

@@ -56,9 +56,4 @@ public class ajax_list extends HttpServlet {
         request.setAttribute("brands", Brand.page(requestPage, resultPerPage, query));
         request.getRequestDispatcher("/member/brands/ajax_brands.jsp").forward(request, response);
     }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
 }

@@ -3,23 +3,34 @@ package Models;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Admin extends DBConnect{
     
 	private int id;
-	private String name, email, password;
+	private String name, role, email, password;
+	private boolean isDeleted;
 
-    public Admin(String name, String email, String password){
-		this.name = name;
-		this.email = email;
-		this.password = password;
+	public Admin(){
+		isDeleted = false;
 	}
 
-	public Admin(int id, String name, String email, String password){
-        this.id = id;
+    public Admin(String name, String role, String email, String password){
 		this.name = name;
+		this.role = role;
 		this.email = email;
 		this.password = password;
+		this.isDeleted = false;
+
+	}
+
+	public Admin(int id, String name, String role, String email, String password){
+        this.id = id;
+		this.name = name;
+		this.role = role;
+		this.email = email;
+		this.password = password;
+		this.isDeleted = false;
 	}
 
     //Id
@@ -38,6 +49,15 @@ public class Admin extends DBConnect{
 		this.name = name;
     }
     
+	//Role
+	public String getRole(){
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
     //Email
     public String getEmail() {
         return email;
@@ -53,6 +73,15 @@ public class Admin extends DBConnect{
     public void setPassword(String password) {
         this.password = password;
     }
+
+	// Delete Admin
+	public boolean getIsDeleted(){
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
 	// Verify Admin
 	public boolean auth(){
@@ -84,13 +113,50 @@ public class Admin extends DBConnect{
     //Create Admin
 	public static void create(Admin admin) {
 		connectDB();
-		sql = "INSERT INTO admins (name, email, password) VALUES (?, ?, ?)";
+		sql = "INSERT INTO admins (name, role, email, password, isDeleted) VALUES (?, ?, ?, ?, ?)";
 		try {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, admin.getName());
-			stmt.setString(2, admin.getEmail());
-			stmt.setString(3, hashPassword(admin.getPassword()));
+			stmt.setString(2, admin.getRole());
+			stmt.setString(3, admin.getEmail());
+			stmt.setString(4, hashPassword(admin.getPassword()));
+			stmt.setBoolean(5, false);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+
+	public void update() {
+		connectDB();
+		sql = "UPDATE admins SET name=?, role=?, email=?, password=? WHERE id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, name);
+			stmt.setString(2, role);
+			stmt.setString(3, email);
+			stmt.setString(4, hashPassword(password));
+			stmt.setInt(5, id);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void delete() {
+		connectDB();
+		sql = "UPDATE admins SET isDeleted=? WHERE id=?";
+
+		try {
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setBoolean(1, true);
+			stmt.setInt(2, id);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -110,7 +176,7 @@ public class Admin extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
+				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -130,13 +196,85 @@ public class Admin extends DBConnect{
 			rs = stmt.executeQuery();
 
 			if(rs.next()){
-				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
+				admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return admin;
 	}
+
+	public static ArrayList<Admin> allStaffs() {
+		connectDB();
+		ArrayList<Admin> admins = new ArrayList<Admin>();
+		sql = "SELECT * FROM admins WHERE isDeleted=? AND  role='staff' ORDER BY id DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setBoolean(1, false);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("email")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return admins;
+	}
+
+	public static ArrayList<Admin> allAdmins() {
+		connectDB();
+		ArrayList<Admin> admins = new ArrayList<Admin>();
+		sql = "SELECT * FROM admins WHERE isDeleted=? AND  role='admin' ORDER BY id DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setBoolean(1, false);
+
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("email")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return admins;
+	}
+
+	//All Staffs with deleted need to change(allStaffs)
+	//public static ArrayList<Admin> allStaffs() {
+	//	connectDB();
+	//	ArrayList<Admin> admins = new ArrayList<Admin>();
+	//	sql = "SELECT * FROM admins WHERE role='staff' ORDER BY id DESC";
+	//	try {
+	//		stmt = conn.prepareStatement(sql);
+//
+//			rs = stmt.executeQuery();
+//			while(rs.next()){
+//				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email")rs.getString("email")));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return admins;
+//	}
+
+	//All Admins with deleted need to change(allAdmins)
+	//public static ArrayList<Admin> allAdmins() {
+	//	connectDB();
+	//	ArrayList<Admin> admins = new ArrayList<Admin>();
+	//	sql = "SELECT * FROM admins WHERE role='admin' ORDER BY id DESC";
+	//	try {
+	//		stmt = conn.prepareStatement(sql);
+//
+//			rs = stmt.executeQuery();
+//			while(rs.next()){
+//				admins.add(new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("role"), rs.getString("email"), rs.getString("password")));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return admins;
+//	}
 	
 
 	// public void update() {

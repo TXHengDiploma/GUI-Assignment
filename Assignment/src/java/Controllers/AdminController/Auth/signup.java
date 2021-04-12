@@ -47,7 +47,7 @@ public class signup extends HttpServlet {
 			return;
         }
 
-        Admin admin = new Admin(request.getParameter("admin_name"), request.getParameter("admin_email"), request.getParameter("admin_password"));
+        Admin admin = new Admin(request.getParameter("admin_name"), request.getParameter("role"),request.getParameter("admin_email"), request.getParameter("admin_password"));
 
         Admin.create(admin);
 

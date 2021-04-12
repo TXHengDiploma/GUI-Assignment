@@ -30,9 +30,4 @@ public class delete extends HttpServlet {
                 .add("script", "Swal.fire({title: 'Completed', text: 'Category Delete Successfully', icon: 'success'}).then(()=>{$('#category-table').ajax_html();})");
         out.print(job.build().toString());
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
 }

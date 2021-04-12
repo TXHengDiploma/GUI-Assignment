@@ -80,6 +80,7 @@
 <div class="signup-form d-flex justify-content-center align-item-center">
     <div class="card">
     <form action="/admin/auth/signup" method="post">
+        <input type="hidden" name="role" value="<%= request.getParameter("role") %>">
         <div class="card-header"><h2>Sign Up</h2></div>
         <div class="card-body">
         <div class="form-group">

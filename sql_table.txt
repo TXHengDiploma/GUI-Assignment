@@ -45,6 +45,7 @@ CREATE TABLE admins
 	role VARCHAR(20),
 	email VARCHAR(100),
 	password VARCHAR(100)
+	isDeleted BOOLEAN NOT NULL DEFAULT false
 );
 
 -- Member Table
@@ -54,7 +55,24 @@ CREATE TABLE members
 	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1000, INCREMENT BY 1),   
 	name VARCHAR(60),
 	email VARCHAR(100),
-	password VARCHAR(100)
+	password VARCHAR(100),
+);
+
+-- Address Table
+
+CREATE TABLE addresses
+(  
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	receiverName VARCHAR(100),
+	remarkName VARCHAR(100),
+	email VARCHAR(100),
+	phoneNumber VARCHAR(12),
+	street VARCHAR(200),
+	city VARCHAR(50),
+	state VARCHAR(50),
+	postalCode VARCHAR(5),
+	memberId INT,
+	FOREIGN KEY (memberId) REFERENCES members(id)
 );
 
 -- Cart Table
@@ -65,5 +83,43 @@ CREATE TABLE carts
 	productId INTEGER,
 	quantity INTEGER,
 	FOREIGN KEY (memberId) REFERENCES members(id),
+	FOREIGN KEY (productId) REFERENCES products(id)
+);
+
+-- Orders Table
+CREATE TABLE orders
+(
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	memberId INTEGER,
+	receiverName VARCHAR(100),
+	remarkName VARCHAR(100),
+	email VARCHAR(100),
+	phoneNumber VARCHAR(12),
+	street VARCHAR(200),
+	city VARCHAR(50),
+	state VARCHAR(50),
+	postalCode VARCHAR(5),
+	status VARCHAR(20),
+	totalPrice DOUBLE,
+	shippingFee DOUBLE,
+	createdAt TIMESTAMP,
+	payAt TIMESTAMP,
+	packingAt TIMESTAMP,
+	deliveringAt TIMESTAMP,
+	deliveredAt TIMESTAMP,
+	isPaid BOOLEAN,
+	FOREIGN KEY (memberId) REFERENCES members(id)
+);
+
+-- Order Products Table
+
+CREATE TABLE orderProducts
+(
+	id INTEGER not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	orderId INTEGER,
+	productId INTEGER,
+	productPrice DOUBLE,
+	productQuantity INTEGER,
+	FOREIGN KEY (orderId) REFERENCES orders(id),
 	FOREIGN KEY (productId) REFERENCES products(id)
 );
