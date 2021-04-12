@@ -20,11 +20,6 @@ public class ajax_table extends HttpServlet {
         request.setAttribute("products", Product.all());
         request.getRequestDispatcher("/admin/products/ajax_table.jsp").forward(request, response);
     }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
 }
 
 

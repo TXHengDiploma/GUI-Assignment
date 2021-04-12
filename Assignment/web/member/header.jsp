@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>${param.pageTitle} - Coy Name</title>
+	<title>${param.pageTitle} - Love Music</title>
 	
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
@@ -60,6 +60,12 @@
 							<a class="nav-link" href="/member/auth/login">Sign In / Sign Up</a>
 						</li>
 					<% } else { %>
+						<li class="nav-item">
+							<a class="nav-link" href="/member/myCart"><i class="fa fa-shopping-cart"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/member/orders/list"><i class="fa fa-truck"></i></a>
+						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="member-profile-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Welcome, ${member.name}

@@ -21,9 +21,20 @@ public class ajax_list extends HttpServlet {
         ArrayList<Brand> brands = new ArrayList<Brand>();
         
         String query = "";
+        if(request.getParameter("filter") != null){
+            String filters[] = request.getParameter("filter").split("@");
+            for(int i = 0; i < filters.length; i++){
+                query += filters[i];
+                if(i != filters.length - 1){
+                    query += " AND ";
+                }
+            }
+        }
         
         if(request.getParameter("search") != null){
-
+            if(query.length() != 0){
+                query += " AND ";
+            }
 
             query += "( LOWER(name) LIKE '%" + request.getParameter("search").toLowerCase()+"%' OR LOWER(description) LIKE '%" + request.getParameter("search").toLowerCase()+"%' )";
         }
@@ -44,10 +55,5 @@ public class ajax_list extends HttpServlet {
 		request.setAttribute("pagination", pagination);
         request.setAttribute("brands", Brand.page(requestPage, resultPerPage, query));
         request.getRequestDispatcher("/member/brands/ajax_brands.jsp").forward(request, response);
-    }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 }

@@ -9,8 +9,6 @@ public class Product extends DBConnect{
 	private String name, imageString, description;
 	private double price;
 	private boolean isDeleted;
-	private Brand brand;
-	private Category category;
 
 	public Product(){
 		isDeleted = false;

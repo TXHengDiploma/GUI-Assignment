@@ -30,17 +30,28 @@
 <div id="brand-list" data-ajax-html="/member/brands/ajax_list" data-default-ajax-html="/member/brands/ajax_list"></div>
 <jsp:include page="/member/footer.jsp"/>
 <script defer>
-	let search = ()=>{
-		$("#brand-list").data("ajax-html", "/member/brands/ajax_list?search="+$("#search").val())
+		let search = ()=>{
+
+		let filter = "";
+
+		if($('[name="brand"]').val() != "" && $('[name="brand"]').val() != null && $('[name="brand"]').val() != undefined) {
+			filter += `id=\${$('[name="brand"]').val()}@`;
+		}
+
+		$("#brand-list").data("ajax-html", `/member/brands/ajax_list?search=\${$("#search").val()}&filter=\${filter}`)
 		$("#brand-list").ajax_html();
 	}
 	$("#search-btn").click(()=>search());
 	
 	let waitSearch;
+
 	$("#search").keyup(
 		()=>{
 			clearTimeout(waitSearch);
 			waitSearch = setTimeout(()=>search(),1000);
 		}
 	);
+
+	$('[name="brand"]').change(()=>search());
+
 </script>

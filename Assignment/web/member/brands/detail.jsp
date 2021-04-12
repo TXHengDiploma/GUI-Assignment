@@ -4,6 +4,11 @@
 <jsp:include page="/member/header.jsp">
 	<jsp:param name="pageTitle" value="Brand Detail Page"/>
 </jsp:include>
+<style>
+	.col-md-6 > img{
+		max-width: 70%;
+	}
+</style>
 
 <!-- Page Features -->
 <script src="/public/vendor/input-spinner/input-spinner.js"></script>
@@ -19,6 +24,7 @@
 					<hr>
 					<b><p class="card-text"><%= brand.getDescription() %></p></b>
 
+					<br />
 					<a href="/member/products/list.jsp?filter=brandId=<%= brand.getId() %>"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="View Products"><i class="fas fa-eye"></i> View Products
 					</button>
 
