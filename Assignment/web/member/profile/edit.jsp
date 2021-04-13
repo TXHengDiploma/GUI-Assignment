@@ -28,8 +28,8 @@
 			</select>
 		  </div>
 		  <div class="form-group col-md-6">
-			<label for="example-date-input" class="col-2 col-form-label">Date</label>
-			  <input name="member_birthday" class="form-control" type="date" id="example-date-input" value="<%= member.getBirthday().toString() %>">
+			<label for="example-date-input">Date</label>
+			  <input name="member_birthday" class="form-control" type="date" id="example-date-input" value="<%= member.getBirthday() != null ? member.getBirthday().toString() : "" %>">
 		  </div>
 		</div>
 		  <div class="form-group">

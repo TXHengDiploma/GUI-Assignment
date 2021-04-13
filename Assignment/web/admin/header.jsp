@@ -1,7 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Models.Admin"%>
-<% Admin admin = session.getAttribute("admin") != null ? (Admin) session.getAttribute("admin") : Admin.find(1000); %>
-<% String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); %>
+<% 
+	Admin admin = (Admin) session.getAttribute("admin"); 
+	String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); 
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +15,7 @@
 	<title>${param.pageTitle} - Love Music</title>
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/public/img/logo/icon.png"/>
 
 	<!-- Start CSS -->
 	<!-- Custom fonts for this template-->

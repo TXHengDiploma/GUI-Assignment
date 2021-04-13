@@ -12,7 +12,7 @@
 	<title>${param.pageTitle} - Love Music</title>
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/jpg" href="/public/img/logo/icon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/public/img/logo/icon.png"/>
 
 	<!-- Start CSS -->
 	<!-- Custom fonts for this template-->
@@ -51,7 +51,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="/">Home</a>
+						<a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/member/products/list.jsp"><i class="fa fa-drum"></i> Products</a>
@@ -62,10 +62,10 @@
 						</li>
 					<% } else { %>
 						<li class="nav-item">
-							<a class="nav-link" href="/member/myCart"><i class="fa fa-shopping-cart"></i></a>
+							<a class="nav-link" href="/member/myCart"><i class="fa fa-shopping-cart"></i> My Carts</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/member/orders/list"><i class="fa fa-truck"></i></a>
+							<a class="nav-link" href="/member/orders/list"><i class="fa fa-truck"></i> My Orders</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="member-profile-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

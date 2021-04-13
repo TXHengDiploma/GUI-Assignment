@@ -46,7 +46,7 @@ public class login extends HttpServlet {
         String returnScript = "";
 
         if(admin == null) {
-            returnScript = "Swal.fire({title: 'Opps...', text: 'This e-mail does not exist in our databas', icon: 'error'})";
+            returnScript = "Swal.fire({title: 'Opps...', text: 'This e-mail does not exist in our database', icon: 'error'})";
         } else if(!admin.getPassword().equals(Admin.hashPassword(request.getParameter("admin_pass")))) {
             returnScript = "Swal.fire({title: 'Opps...', text: 'Wrong Password! ', icon: 'error'})";
         } else {

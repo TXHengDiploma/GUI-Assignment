@@ -11,16 +11,16 @@
           Edit Password
         </div>
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-12">
             <label for="inputPassword4">Old Password</label>
             <input name="member_password_old" type="password" class="form-control" placeholder="Enter Old Password" required="required">
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-12">
             <label for="inputPassword4">New Password</label>
             <input name="member_password" type="password" class="form-control" placeholder="Enter New Password" required="required">
           </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">confirm New Password</label>
+          <div class="form-group col-12">
+            <label for="inputPassword4">Confirm Password</label>
             <input name="member_confirmpass" type="password" class="form-control" placeholder="Enter Confirm Password" required="required">
           </div>
         </div>

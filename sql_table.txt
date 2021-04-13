@@ -48,7 +48,7 @@ CREATE TABLE admins
 	isDeleted BOOLEAN NOT NULL DEFAULT false
 );
 
-INSERT INTO admins (name, role, email, password) VALUES ( 'Admin', 'admin', 'admin@lovemusic.com', 'bc63837321258858695a6c1f2b74eb35' );
+INSERT INTO admins (name, role, email, password) VALUES ( 'Admin', 'admin', 'admin@lovemusic.com', '21232f297a57a5a743894a0e4a801fc3' );
 -- Member Table
 
 CREATE TABLE members

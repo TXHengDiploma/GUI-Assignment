@@ -28,7 +28,6 @@ public class edit extends HttpServlet {
             response.sendRedirect("/member/auth/login");
             return;
         }
-        Member member = (Member) session.getAttribute("member");
 
         request.getRequestDispatcher("/member/profile/edit.jsp").forward(request, response);
     }

@@ -44,9 +44,11 @@ public class edit extends HttpServlet {
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             JsonObjectBuilder job = Json.createObjectBuilder()
-                .add("script", "Swal.fire({title: 'Opps...', text: 'Create Fail!', icon: 'error'})");
+                .add("script", "Swal.fire({title: 'Opps...', text: 'You have entered a different password.', icon: 'error'})");
             out.print(job.build().toString());
             return;
+        } else {
+            admin.setPassword(password);
         }
 
         admin.update();
