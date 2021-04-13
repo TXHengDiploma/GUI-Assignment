@@ -32,7 +32,6 @@
 						<input type="number" name="quantity" value="1" min="1" max="100" step="1"/>
 					</div>
 					<button data-add-to-cart="<%= product.getId() %>" type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Add To Cart"><i class="fas fa-cart-plus"></i> Add To Cart</button>
-					<button class="btn btn-primary" type="button">Buy Now!</i></button>
 				</div>
 			</div>
 		</div>

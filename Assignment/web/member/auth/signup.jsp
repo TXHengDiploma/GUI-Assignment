@@ -44,6 +44,7 @@
 			<button type="submit" class="btn btn-primary btn-block">Sign Up</button>
 		</div>
 	</form>
+	<p class="text-center">Already have an account? <a href="/member/auth/login">Sign In</a></p>
 </div>
 <!-- /.row -->
 

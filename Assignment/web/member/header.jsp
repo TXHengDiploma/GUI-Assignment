@@ -50,10 +50,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
-						</a>
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/member/products/list.jsp"><i class="fa fa-drum"></i> Products</a>
 					</li>
 					<% if(member == null){ %>
 						<li class="nav-item">
@@ -71,7 +72,6 @@
 							Welcome, ${member.name}
 							</a>
 							<div class="dropdown-menu" aria-labelledby="member-profile-dropdown">
-							<a class="dropdown-item" href="#">Action</a>
 							<a class="dropdown-item" href="/member/profile/edit">My Profile</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" data-logout="/member/auth/logout">Logout</a>
@@ -85,12 +85,3 @@
 
 	<!-- Page Content -->
 	<div class="container" style="padding-top: 80px; min-height: calc(100% - 85px);">
-
-		<%-- <!-- Jumbotron Header -->
-		<header class="jumbotron my-4">
-			<h1 class="display-3">A Warm Welcome!</h1>
-			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt
-				possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam
-				repellat.</p>
-			<a href="#" class="btn btn-primary btn-lg">Call to action!</a>
-		</header> --%>
