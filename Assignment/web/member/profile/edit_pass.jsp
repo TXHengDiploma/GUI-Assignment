@@ -5,7 +5,7 @@
 </jsp:include>
 <div class="row mt-5">
 <div class="col-lg-6 offset-lg-3">
-    <form form action="/member/profile/edit_pass" method="post" >
+    <form action="/member/profile/edit_pass" method="post" >
       <div class="jumbotron">
         <div class="card-header">
           Edit Password

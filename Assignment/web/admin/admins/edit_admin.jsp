@@ -17,11 +17,15 @@
 					<input name="admin_name" type="text" class="form-control" placeholder="Enter Admin Name" maxlength="100" required value="<%= admin.getName() %>">
 				</div>
 
-				<div class="form-group">
-					<label for="admin_role">Role: </label>
-					<input name="admin_role" type="text" class="form-control" placeholder="Enter Admin Role" maxlength="100" required value="<%= admin.getRole() %>">
+                <div class="form-group">
+					<label>Role: </label>
+					<select name="admin_role" required class="form-control">
+						<option value="">-- Select One Role --</option>
+						<option value="admin">Admin</option>
+						<option value="staff">Staff</option>	
+					</select>
 				</div>
-
+				
                 <div class="form-group">
 					<label for="admin_email">Email: </label>
 					<input name="admin_email" type="text" class="form-control" maxlength="100" required value="<%= admin.getEmail() %>" disabled>
@@ -41,21 +45,6 @@
 					<label for="admin_confirmpass">Confirm Password: </label>
 					<input name="admin_confirmpass" type="password" class="form-control" placeholder="Enter Admin Password" maxlength="100">
 				</div>
-
-
-                <%--
-
-                <div class="form-group">
-					<label>Brand: </label>
-					<select name="prod_brand" required class="form-control">
-						<option value="">-- Select One Brand --</option>
-						<% for(Brand brand : (ArrayList<Brand>) request.getAttribute("brands")){ %>
-							<option value="<%= brand.getId() %>" <%= brand.getId() == product.getBrandId() ? "selected" : "" %> ><%= brand.getName() %></option>
-						<% } %>
-					</select>
-				</div>
-                
-                --%>
 				
 			</div>
 			<div class="modal-footer">
