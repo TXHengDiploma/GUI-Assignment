@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import Models.Admin;
 
@@ -18,12 +17,22 @@ public class signup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         request.getRequestDispatcher("/admin/auth/signup.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
+
         PrintWriter out = response.getWriter();
         
         if(!request.getParameter("admin_password").equals(request.getParameter("admin_confirmpass")))

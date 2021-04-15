@@ -19,7 +19,10 @@ public class sales_chart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+		if(request.getSession().getAttribute("admin") == null) {
+			request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+			return;
+		}
 		int month = Integer.parseInt(request.getParameter("month")), year = Integer.parseInt(request.getParameter("year"));
 		YearMonth ym = YearMonth.of(year, month);
 		int size = ym.lengthOfMonth();

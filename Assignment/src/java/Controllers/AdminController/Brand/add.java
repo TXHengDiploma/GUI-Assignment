@@ -17,12 +17,21 @@ public class add extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         request.getRequestDispatcher("/admin/brands/add_brand.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 
         String name = request.getParameter("brand_name");
         String imageString = request.getParameter("brand_img");

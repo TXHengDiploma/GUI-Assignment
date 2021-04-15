@@ -17,6 +17,10 @@ public class details extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         request.setAttribute("member", Member.find(Integer.parseInt(request.getParameter("id"))));
         request.getRequestDispatcher("/admin/members/details.jsp").forward(request, response);
     }

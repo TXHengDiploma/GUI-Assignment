@@ -19,7 +19,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		Product product = Product.find(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("product", product);
         request.setAttribute("brands", Brand.all());
@@ -30,7 +33,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		String name = request.getParameter("prod_name");
 		double price = Double.parseDouble(request.getParameter("prod_price"));
 		String imageString = request.getParameter("prod_img");

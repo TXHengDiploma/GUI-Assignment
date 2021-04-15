@@ -18,6 +18,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         Order order = Order.find(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("order", order);
         request.setAttribute("orderProducts", order.getOrderProducts());
@@ -28,7 +32,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		Order order = Order.find(Integer.parseInt(request.getParameter("id")));
         Timestamp now = new Timestamp(System.currentTimeMillis());
         String status = request.getParameter("status");

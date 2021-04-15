@@ -17,12 +17,11 @@ public class ajax_table extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         request.setAttribute("members", Member.all());
         request.getRequestDispatcher("/admin/members/ajax_table.jsp").forward(request, response);
-    }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 }

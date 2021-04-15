@@ -17,7 +17,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }		
 		Admin admin = Admin.find(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("staff", admin);
         request.getRequestDispatcher("/admin/staffs/edit_staff.jsp").forward(request, response);
@@ -26,7 +29,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		String name = request.getParameter("admin_name");
         String role = request.getParameter("admin_role");
         String email = request.getParameter("admin_email");
@@ -59,10 +65,5 @@ public class edit extends HttpServlet {
         JsonObjectBuilder job = Json.createObjectBuilder()
                 .add("script", "Swal.fire({title: 'Completed', text: 'Staff Update Successfully', icon: 'success'}).then(()=>{ $('#ajax-modal').modal('toggle'); $('#admin-table').ajax_html();})");
         out.print(job.build().toString());
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
+    } 
 }

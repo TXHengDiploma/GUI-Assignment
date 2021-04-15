@@ -19,6 +19,10 @@ public class add extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         request.setAttribute("brands", Brand.all());
         request.setAttribute("categories", Category.all());
         request.getRequestDispatcher("/admin/products/add_product.jsp").forward(request, response);

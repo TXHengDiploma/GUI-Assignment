@@ -17,6 +17,10 @@ public class ajax_table extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         request.setAttribute("categories", Category.all());
         request.getRequestDispatcher("/admin/categories/ajax_table.jsp").forward(request, response);
     }

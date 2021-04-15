@@ -1,6 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Models.Admin"%>
 <% 
+	if(session.getAttribute("admin") == null) {
+		request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+		return;
+	}
 	Admin admin = (Admin) session.getAttribute("admin"); 
 	String[] urlSegments = request.getRequestURI().substring(request.getContextPath().length()+1).split("/"); 
 %>

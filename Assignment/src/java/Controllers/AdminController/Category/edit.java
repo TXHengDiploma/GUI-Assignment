@@ -17,7 +17,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		Category category = Category.find(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("category", category);
         request.getRequestDispatcher("/admin/categories/edit_category.jsp").forward(request, response);
@@ -26,7 +29,10 @@ public class edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		String name = request.getParameter("cate_name");
 		String icon = request.getParameter("cate_icon");
 		String description = request.getParameter("cate_desc");

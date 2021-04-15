@@ -17,6 +17,10 @@ public class ajax_table extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
         ArrayList<Order> orders;
         if(request.getParameter("month") != null && request.getParameter("year") != null){
             orders = Order.byMonth(Integer.parseInt(String.valueOf(request.getParameter("month"))), Integer.parseInt(String.valueOf(request.getParameter("year"))));

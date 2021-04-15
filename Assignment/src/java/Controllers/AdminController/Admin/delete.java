@@ -18,6 +18,11 @@ public class delete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
+
 		Admin admin = Admin.find(Integer.parseInt(request.getParameter("id")));
 		
 		admin.delete();
@@ -29,10 +34,5 @@ public class delete extends HttpServlet {
         JsonObjectBuilder job = Json.createObjectBuilder()
                 .add("script", "Swal.fire({title: 'Completed', text: 'Admin Delete Successfully', icon: 'success'}).then(()=>{$('#admin-table').ajax_html();})");
         out.print(job.build().toString());
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }   
+    } 
 }

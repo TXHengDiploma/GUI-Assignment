@@ -17,7 +17,11 @@ public class edit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		
+        
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 		Admin admin = Admin.find(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("admin", admin);
         request.getRequestDispatcher("/admin/admins/edit_admin.jsp").forward(request, response);
@@ -26,6 +30,11 @@ public class edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(request.getSession().getAttribute("admin") == null) {
+            request.getRequestDispatcher("/admin/auth/login.jsp").forward(request,response);
+            return;
+        }
 
 		String name = request.getParameter("admin_name");
         String role = request.getParameter("admin_role");
