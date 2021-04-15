@@ -21,8 +21,8 @@
 					<label>Role: </label>
 					<select name="admin_role" required class="form-control">
 						<option value="">-- Select One Role --</option>
-						<option value="admin">Admin</option>
-						<option value="staff">Staff</option>	
+						<option value="admin" <%= admin.getRole().equals("admin") ? "selected" : "" %>>Admin</option>
+						<option value="staff" <%= admin.getRole().equals("staff") ? "selected" : "" %>>Staff</option>	
 					</select>
 				</div>
 				
@@ -53,16 +53,3 @@
 		</form>
 	</div>
 </div>
-<script defer>
-	function readFile() {
-		if (this.files && this.files[0]) {
-			var FR= new FileReader();
-			FR.addEventListener("load", function(e) {
-				document.getElementById("img_preview").src = e.target.result;
-				document.getElementById("b64").value = e.target.result;
-			}); 
-			FR.readAsDataURL( this.files[0] );
-		}
-	}
-	document.getElementById("inp").addEventListener("change", readFile);
-</script>

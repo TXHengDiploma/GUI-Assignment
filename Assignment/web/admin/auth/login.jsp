@@ -136,10 +136,6 @@ body {
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
                 </div>
-                <div class="bottom-action clearfix">
-                    <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-                    <a href="#" class="float-right">Forgot Password?</a>
-                </div>
             </form>
         </div>
     </div>
