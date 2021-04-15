@@ -3,7 +3,8 @@
 <% ArrayList<Member> members = (ArrayList<Member>) request.getAttribute("members"); %>
 <table class="member-table display w-100">
 	<thead>
-		<th class="sorting">Name</th>
+		<th>Member Id</th>
+		<th>Name</th>
 		<th>Email</th>
 		<th>Gender</th>
 		<th>Birthday</th>
@@ -12,10 +13,11 @@
 		<% if(members.size() != 0){ %>
 			<% for(Member member : members) { %> 
 			<tr>
+				<td><a href="/admin/members/details?id=<%= member.getId() %>">LMM<%= member.getId() %></a></td>
 				<td><%= member.getName() %></td>
 				<td><%= member.getEmail() %></td>
-				<td><%= member.getGender() != null ?member.getGender() : "not set yet" %></td>
-				<td><%= member.getBirthday() != null ?member.getBirthday() : "not set yet" %></td>
+				<td><%= member.getGender() != null ? member.getGender() : "-" %></td>
+				<td><%= member.getBirthday() != null ? member.getBirthday().toString() : "-" %></td>
 			</tr>
 			<% } %>
 		<% } %>
@@ -24,10 +26,11 @@
 <script defer>
     $(".member-table").DataTable({
 		"columns": [
-			{ "width": "25%", "orderable": false },
-			{ "width": "30%" },
-			{ "width": "15%" },
-			{ "width": "25%", "orderable": false },
+			{ "width": "10%"},
+			{ "width": "25%"},
+			{ "width": "25%"},
+			{ "width": "10%"},
+			{ "width": "25%"},
 		]
 	});
 </script>

@@ -11,18 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import Models.Member;
 
-@WebServlet(name = "AdminMemberList", urlPatterns = {"/admin/members/ajax_table"})
-public class ajax_table extends HttpServlet {
+@WebServlet(name = "AdminMemberDetails", urlPatterns = {"/admin/members/details"})
+public class details extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("members", Member.all());
-        request.getRequestDispatcher("/admin/members/ajax_table.jsp").forward(request, response);
-    }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+        request.setAttribute("member", Member.find(Integer.parseInt(request.getParameter("id"))));
+        request.getRequestDispatcher("/admin/members/details.jsp").forward(request, response);
     }
 }

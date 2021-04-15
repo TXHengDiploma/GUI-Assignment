@@ -91,6 +91,12 @@
 				</a>
 			</li>
 
+			<li class="nav-item <%=urlSegments[1].equals("members") ? "active" : ""%>">
+				<a class="nav-link collapsed" href="/admin/members/list.jsp">
+					<i class="fas fa-fw fa-users"></i>
+					<span>Members</span>
+				</a>
+			</li>
 
 			<li class="nav-item <%= urlSegments[1].equals("reports") ? "active" : ""%>">
 				<a class="nav-link collapsed" href="/admin/reports/monthly_sales_report.jsp">

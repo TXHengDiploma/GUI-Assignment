@@ -183,7 +183,7 @@ public class Member extends DBConnect{
 
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				members.add(new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password")));
+				members.add(new Member(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("gender") ,rs.getDate("birthday")));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
